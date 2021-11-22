@@ -1,0 +1,56 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- Set up FireBase, set up android studio project
+- Create design for database
+What are you planning on doing today?
+- User login (and GUI)
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Set up GitHub repository and project board
+- Set up user stories as issues
+
+What are you planning on doing today?
+- Learn Firebase
+- 
+
+Any impediments or stumbling blocks?
+- B41 assignment
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+
+What are you planning on doing today?
+- Learn Firebase
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+
+What are you planning on doing today?
+- Learn Firebase
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+
+What are you planning on doing today?
+- Learn Firebase
+
+Any impediments or stumbling blocks?
