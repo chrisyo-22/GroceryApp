@@ -1,0 +1,58 @@
+
+Name: Chris Yo
+
+What have you done since yesterday?
+- Set up user registration
+What are you planning on doing today?
+- User login (and GUI)
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Looked into Firebase
+
+What are you planning on doing today?
+- Create general GUI (fragment)
+- Owner product list and creating products for store
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+- Looked into Firebase
+
+What are you planning on doing today?
+- Display stores for customer
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+- Looked into Firebase
+
+What are you planning on doing today?
+- User cart, create orders
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+- Looked into Firebase
+
+What are you planning on doing today?
+- List of orders for owner and mark order as complete
+
+Any impediments or stumbling blocks?
