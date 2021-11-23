@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryApp">
         <activity
+            android:name=".General_page"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
