@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -71,8 +72,12 @@ public class Register extends AppCompatActivity {
                         if(task.isSuccessful()){
                             //reading database and create a new user
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                            User new_user = new User(username,email,name);
-                            ref.child("User").child(username).setValue(new_user);
+                            //get current userid:
+                            FirebaseUser f_user = FirebaseAuth.getInstance().getCurrentUser();
+                            String UID = f_user.getUid();
+
+                            User new_user = new User(UID,email,name);
+                            ref.child("Users").child(UID).setValue(new_user);
                             Toast.makeText(Register.this,"User created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), ShopActivity.class));
                         }
