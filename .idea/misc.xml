@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/drawable/Bars.xml" value="0.26875" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_general_page.xml" value="0.33" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_login.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_main.xml" value="0.5" />
@@ -12,6 +11,7 @@
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.225" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.225" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_general_page.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_login.xml" value="0.371875" />
       </map>
     </option>
   </component>
