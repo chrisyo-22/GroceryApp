@@ -1,19 +1,31 @@
 package com.example.groceryapp;
 
-public class Users {
+import java.util.Objects;
+
+public class User {
     int owned_store_id;
     private String username, email, name;
 
     //constructor:
-    public Users(String username,  String email, String name){
+    public User(String username, String email, String name){
         this.username = username;
         this.email = email;
         this.name = name;
         owned_store_id = -1;
     }
 
-    //we need to override Hashcode, and equals method in Users too!
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return owned_store_id == user.owned_store_id && username.equals(user.username) && email.equals(user.email) && name.equals(user.name);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(owned_store_id, username, email, name);
+    }
 
     public int getOwned_store_id() {
         return owned_store_id;

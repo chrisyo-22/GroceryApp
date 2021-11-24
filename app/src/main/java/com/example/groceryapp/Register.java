@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -72,10 +71,10 @@ public class Register extends AppCompatActivity {
                         if(task.isSuccessful()){
                             //reading database and create a new user
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                            Users new_user = new Users(username,email,name);
-                            ref.child("Users").child(username).setValue(new_user);
+                            User new_user = new User(username,email,name);
+                            ref.child("User").child(username).setValue(new_user);
                             Toast.makeText(Register.this,"User created", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), ShopActivity.class));
                         }
                         else{
                             Toast.makeText(Register.this, "Error! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();

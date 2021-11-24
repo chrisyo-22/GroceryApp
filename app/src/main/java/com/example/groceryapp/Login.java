@@ -35,7 +35,8 @@ public class Login extends AppCompatActivity {
 
         //if user already login in
         if(f_auth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            f_auth.getCurrentUser().get
+            startActivity(new Intent(getApplicationContext(), ShopActivity.class));
             finish();
         }
         jump_register.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Login.this,"Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), ShopActivity.class));
                         }
                         else{
                             Toast.makeText(Login.this, "Error! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
