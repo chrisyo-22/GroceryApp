@@ -1,0 +1,58 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- User login (and GUI)
+What are you planning on doing today?
+- Classes for Order, Product, Store
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Create general GUI for navigation and main activities
+
+What are you planning on doing today?
+- Fix bugs
+- Owner product list and creating products for store
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- User cart, create orders
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- List of orders for owner and mark order as complete
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+- profile page GUI
+
+What are you planning on doing today?
+- Display stores for customer
+
+Any impediments or stumbling blocks?
