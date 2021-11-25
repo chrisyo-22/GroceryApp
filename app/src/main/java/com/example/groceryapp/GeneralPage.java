@@ -1,12 +1,20 @@
 package com.example.groceryapp;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class GeneralPage extends AppCompatActivity {
     Button shopButton, myStoreButton, cartButton, accountButton;
@@ -46,6 +54,20 @@ public class GeneralPage extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        String current_user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference dref = FirebaseDatabase.getInstance().getReference("Users");
+        dref.child(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(!task.isSuccessful()) {
+                    Log.e("GroceryApp", "Error getting user data", task.getException());
+                } else {
+                    accountButton.setText(task.getResult().getValue(User.class).getName());
+                }
+            }
+        });
+
     }
 
     public void goToShop(View view) {

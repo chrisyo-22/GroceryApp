@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity {
 
         //if user already login in
         if(f_auth.getCurrentUser() != null){
-//            f_auth.getCurrentUser().get
             startActivity(new Intent(getApplicationContext(), ShopActivity.class));
             finish();
         }

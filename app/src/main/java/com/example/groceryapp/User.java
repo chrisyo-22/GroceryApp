@@ -7,6 +7,10 @@ public class User {
     private String username, email, name;
 
     //constructor:
+    public User(){
+
+    }
+
     public User(String username, String email, String name){
         this.username = username;
         this.email = email;
