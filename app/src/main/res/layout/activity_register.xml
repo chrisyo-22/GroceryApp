@@ -23,31 +23,16 @@
 
 
     <EditText
-        android:id="@+id/signup_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Signup_tag" />
-
-    <EditText
         android:id="@+id/signup_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_password"
         tools:ignore="TouchTargetSizeCheck" />
@@ -56,53 +41,41 @@
         android:id="@+id/signup_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Email Address"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_name" />
+        app:layout_constraintTop_toBottomOf="@+id/Signup_tag" />
 
     <EditText
         android:id="@+id/signup_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_username" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_email" />
 
     <Button
         android:id="@+id/signup_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="40dp"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_email" />
-
-    <TextView
-        android:id="@+id/promt_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="User or Password incorrect"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_button"
-        app:layout_constraintVertical_bias="0.005"
-        tools:layout_editor_absoluteX="109dp" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

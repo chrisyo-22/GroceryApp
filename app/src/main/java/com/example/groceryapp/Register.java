@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
-    EditText r_name, r_username, r_password, r_email;
+    EditText r_name, r_password, r_email;
     Button r_register_btn;
     FirebaseAuth f_auth;
 
@@ -31,7 +31,6 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         r_name = findViewById(R.id.signup_name);
-        r_username = findViewById(R.id.signup_username);
         r_password = findViewById(R.id.signup_password);
         r_email = findViewById(R.id.signup_email);
         r_register_btn = findViewById(R.id.signup_button);
@@ -42,12 +41,11 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = r_name.getText().toString().trim();
-                String username = r_username.getText().toString().trim();
                 String password = r_password.getText().toString().trim();
                 String email = r_email.getText().toString().trim();
 
-                if(TextUtils.isEmpty(username)){
-                    r_username.setError("Username is Required");
+                if(TextUtils.isEmpty(email)){
+                    r_email.setError("Email is Required");
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -61,11 +59,6 @@ public class Register extends AppCompatActivity {
                 }
 
 
-                if(TextUtils.isEmpty(email)){
-                    r_email.setError("Email is Required");
-                    return;
-                }
-
                 f_auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -76,7 +69,7 @@ public class Register extends AppCompatActivity {
                             FirebaseUser f_user = FirebaseAuth.getInstance().getCurrentUser();
                             String UID = f_user.getUid();
 
-                            User new_user = new User(UID,email,name);
+                            User new_user = new User(email,name);
                             ref.child("Users").child(UID).setValue(new_user);
                             Toast.makeText(Register.this,"User created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), ShopActivity.class));

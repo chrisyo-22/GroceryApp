@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
-    EditText l_username, l_password;
+    EditText l_email, l_password;
     Button l_login_btn;
     FirebaseAuth f_auth;
     TextView jump_register;
@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        l_username = findViewById(R.id.signin_username);
+        l_email = findViewById(R.id.signin_username);
         l_password = findViewById(R.id.signin_password);
         l_login_btn = findViewById(R.id.signin_button);
         jump_register = findViewById(R.id.Swap_to_register);
@@ -48,10 +48,10 @@ public class Login extends AppCompatActivity {
         l_login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = l_username.getText().toString().trim();
+                String email = l_email.getText().toString().trim();
                 String password = l_password.getText().toString().trim();
-                if(TextUtils.isEmpty(username)){
-                    l_username.setError("Username is Required");
+                if(TextUtils.isEmpty(email)){
+                    l_email.setError("Email is Required");
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                f_auth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                f_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){

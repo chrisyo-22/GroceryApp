@@ -3,16 +3,10 @@ package com.example.groceryapp;
 import java.util.Objects;
 
 public class User {
-    int owned_store_id;
-    private String username, email, name;
+    private int owned_store_id;
+    private String email, name;
 
-    //constructor:
-    public User(){
-
-    }
-
-    public User(String username, String email, String name){
-        this.username = username;
+    public User(String email, String name){
         this.email = email;
         this.name = name;
         owned_store_id = -1;
@@ -23,12 +17,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return owned_store_id == user.owned_store_id && username.equals(user.username) && email.equals(user.email) && name.equals(user.name);
+        return owned_store_id == user.owned_store_id && email.equals(user.email) && name.equals(user.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(owned_store_id, username, email, name);
+        return Objects.hash(owned_store_id, email, name);
     }
 
     public int getOwned_store_id() {
@@ -37,14 +31,6 @@ public class User {
 
     public void setOwned_store_id(int owned_store_id) {
         this.owned_store_id = owned_store_id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
 

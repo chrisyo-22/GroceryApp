@@ -57,13 +57,15 @@ public class GeneralPage extends AppCompatActivity {
 
         String current_user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference dref = FirebaseDatabase.getInstance().getReference("Users");
-        dref.child(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        dref.child(current_user_id).child("name").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(!task.isSuccessful()) {
                     Log.e("GroceryApp", "Error getting user data", task.getException());
                 } else {
-                    accountButton.setText(task.getResult().getValue(User.class).getName());
+                    //
+                    accountButton.setText(task.getResult().getValue().toString());
+                    //Log.i("demo", String.valueOf(task.getResult()));
                 }
             }
         });
