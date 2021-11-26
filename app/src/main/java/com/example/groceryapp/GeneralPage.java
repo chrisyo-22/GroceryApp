@@ -65,7 +65,7 @@ public class GeneralPage extends AppCompatActivity {
                 } else {
                     //
                     accountButton.setText(task.getResult().getValue().toString());
-
+                    //Log.i("demo", String.valueOf(task.getResult()));
                 }
             }
         });

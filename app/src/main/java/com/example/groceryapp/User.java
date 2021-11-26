@@ -11,9 +11,6 @@ public class User {
         this.name = name;
         owned_store_id = -1;
     }
-    public User(){
-
-    }
 
     @Override
     public boolean equals(Object o) {

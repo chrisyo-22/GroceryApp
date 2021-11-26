@@ -77,21 +77,34 @@
         android:id="@+id/Swap_to_register"
         android:layout_width="310dp"
         android:layout_height="28dp"
-        android:layout_below="@+id/signin_button"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="148dp"
 
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="239dp"
         android:background="@color/teal_700"
         android:hapticFeedbackEnabled="false"
         android:text="Haven't got an Account? Click Here to SIGN UP!"
         android:visibility="visible"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/promt_password"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signin_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="104dp"
+        android:text="Password incorrect"
+        android:visibility="visible" />
 
 
 </RelativeLayout>
