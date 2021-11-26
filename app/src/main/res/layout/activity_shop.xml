@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEDED"
+    android:background="@color/white"
     tools:context=".ShopActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="62dp"
             android:background="#8C4598"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -110,16 +110,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView2"
+    <ListView
+        android:id="@+id/shop_store_list"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="SHOP PAGE"
-        android:textSize="48sp"
-        android:textStyle="bold"
+        android:layout_height="720dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

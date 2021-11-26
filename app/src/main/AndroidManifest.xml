@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryApp">
         <activity
+            android:name=".ShopProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".CreateStoreActivity"
             android:exported="false" />
         <activity
