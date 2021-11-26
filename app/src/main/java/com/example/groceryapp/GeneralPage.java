@@ -50,6 +50,7 @@ public class GeneralPage extends AppCompatActivity {
                     } else {
                         startActivity(new Intent(getApplicationContext(),Register.class));
                         Log.e("GroceryApp", "Error getting user data", task.getException());
+                        //startActivity(new Intent(getApplicationContext(), Register.class));
                     }
                 }
             }
