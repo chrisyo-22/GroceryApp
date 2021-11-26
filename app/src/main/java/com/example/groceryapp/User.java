@@ -3,13 +3,18 @@ package com.example.groceryapp;
 import java.util.Objects;
 
 public class User {
-    private int owned_store_id;
+    private String owned_store_id;
     private String email, name;
 
+    public User(){
+        this.email = "null-email";
+        this.name = "null-name";
+        owned_store_id = "null";
+    }
     public User(String email, String name){
         this.email = email;
         this.name = name;
-        owned_store_id = -1;
+        owned_store_id = "null";
     }
 
     @Override
@@ -17,7 +22,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return owned_store_id == user.owned_store_id && email.equals(user.email) && name.equals(user.name);
+        return owned_store_id.equals(user.owned_store_id) && email.equals(user.email) && name.equals(user.name);
     }
 
     @Override
@@ -25,11 +30,11 @@ public class User {
         return Objects.hash(owned_store_id, email, name);
     }
 
-    public int getOwned_store_id() {
+    public String getOwned_store_id() {
         return owned_store_id;
     }
 
-    public void setOwned_store_id(int owned_store_id) {
+    public void setOwned_store_id(String owned_store_id) {
         this.owned_store_id = owned_store_id;
     }
 

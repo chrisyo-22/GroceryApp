@@ -1,10 +1,13 @@
 package com.example.groceryapp;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Order {
-    private Hashtable<Product, Integer> items;
+    private String customer_id;
+    private ArrayList<OrderItem> items;
     private boolean is_complete = false;
+
     public boolean is_complete() {
         return is_complete;
     }
@@ -13,13 +16,22 @@ public class Order {
         this.is_complete = true;
     }
 
-    public Order(){
-        items = new Hashtable<Product, Integer>();
+    public Order(String customer_id){
+        this.customer_id = customer_id;
+        items = new ArrayList<OrderItem>();
     }
 
     //adding item to the Hashtable:
-    public void set_item_quantity(Product product, Integer quantity){
-        items.put(product,quantity);
+    public void add_item(Product product, int quantity){
+        items.add(new OrderItem(product,quantity));
+    }
+
+    public void set_quantity(Product product, int quantity) {
+        for(OrderItem item : items) {
+            if(product.equals(item.getProduct())) {
+                item.setQuantity(quantity);
+            }
+        }
     }
 
     //remove item from the Hashtable:

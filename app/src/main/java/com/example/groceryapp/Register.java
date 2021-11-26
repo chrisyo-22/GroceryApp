@@ -70,7 +70,7 @@ public class Register extends AppCompatActivity {
                             String UID = f_user.getUid();
 
                             User new_user = new User(email,name);
-                            ref.child("Users").child(UID).setValue(new_user);
+                            ref.child(DBConstants.USERS_PATH).child(UID).setValue(new_user);
                             Toast.makeText(Register.this,"User created", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), ShopActivity.class));
                         }
