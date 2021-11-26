@@ -1,0 +1,63 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- User login remove username field
+- Bug fixes
+
+What are you planning on doing today?
+- Bug fixes
+- Reset password
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Display user name on account navigation button
+- Design My Store page UI
+
+What are you planning on doing today?
+- Fix bugs
+- Owner CREATE store
+- Owner product list and creating products for store
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- User cart, create orders
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- List of orders for owner and mark order as complete
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+- edit Store class
+
+What are you planning on doing today?
+- Display stores for customer
+
+Any impediments or stumbling blocks?
