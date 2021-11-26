@@ -46,9 +46,9 @@ public class GeneralPage extends AppCompatActivity {
                 } else {
                     current_user = task.getResult().getValue(User.class);
                     if(current_user != null) {
-
                         initializeNavigation();
                     } else {
+                        startActivity(new Intent(getApplicationContext(),Register.class));
                         Log.e("GroceryApp", "Error getting user data", task.getException());
                     }
                 }
@@ -58,8 +58,6 @@ public class GeneralPage extends AppCompatActivity {
     }
 
     private void initializeNavigation() {
-
-
 
         accountButton.setText(current_user.getName());
 

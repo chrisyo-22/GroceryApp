@@ -1,9 +1,9 @@
 package com.example.groceryapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-public class Store {
+public class Store implements Serializable {
     private String owner_id;
     private String name;
     private String address;
@@ -66,4 +66,5 @@ public class Store {
     public void set_complete(Order completed_order){
         completed_order.complete_order();
     }
+
 }
