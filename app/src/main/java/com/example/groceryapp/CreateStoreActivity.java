@@ -13,14 +13,11 @@ public class CreateStoreActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserData(R.layout.activity_create_store);
-
-
+        initializePage(R.layout.activity_create_store);
     }
 
     @Override
-    public void initializeNavigation(int activityXML) {
-        super.initializeNavigation(activityXML);
+    public void initializeOther() {
 
         storeNameField = findViewById(R.id.editStoreName);
         addressField = findViewById(R.id.editAddress);

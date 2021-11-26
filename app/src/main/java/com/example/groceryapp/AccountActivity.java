@@ -12,12 +12,11 @@ public class AccountActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserData(R.layout.activity_account);
+        initializePage(R.layout.activity_account);
     }
 
     @Override
-    public void initializeNavigation(int activityXML) {
-        super.initializeNavigation(activityXML);
+    public void initializeOther() {
         logout_btn = findViewById(R.id.sign_out_btn);
 
         logout_btn.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,6 @@ public class ShopActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserData(R.layout.activity_shop);
+        initializePage(R.layout.activity_shop);
     }
 }

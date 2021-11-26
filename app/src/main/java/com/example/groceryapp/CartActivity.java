@@ -7,6 +7,6 @@ public class CartActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserData(R.layout.activity_cart);
+        initializePage(R.layout.activity_cart);
     }
 }

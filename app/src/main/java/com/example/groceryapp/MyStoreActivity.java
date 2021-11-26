@@ -18,16 +18,14 @@ public class MyStoreActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUserData(R.layout.activity_my_store);
+        initializePage(R.layout.activity_my_store);
 
 //        if(current_user == null) return;
 
     }
 
     @Override
-    public void initializeNavigation(int activityXML) {
-        super.initializeNavigation(activityXML);
-
+    public void initializeOther() {
         storeNameTextView = findViewById(R.id.storeNameText);
         addressTextView = findViewById(R.id.addressText);
 

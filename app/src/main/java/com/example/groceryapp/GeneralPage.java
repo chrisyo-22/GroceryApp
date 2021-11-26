@@ -17,13 +17,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class GeneralPage extends AppCompatActivity {
+    public static final String EXTRA_USER_NAME = "com.example.groceryapp.USER_NAME";
+
     Button shopButton, myStoreButton, cartButton, accountButton;
     DatabaseReference ref;
     String current_user_id;
     User current_user;
 
 
-    public void initializeUserData(int activityXML) {
+    public void initializePage(int activityXML) {
+        setContentView(activityXML);
+        shopButton = findViewById(R.id.shop_button);
+        myStoreButton = findViewById(R.id.my_store_button);
+        cartButton = findViewById(R.id.cart_button);
+        accountButton = findViewById(R.id.account_button);
+
+        accountButton.setText(getIntent().getStringExtra(EXTRA_USER_NAME));
+
+        // Get database and user data
         ref = FirebaseDatabase.getInstance().getReference();
         current_user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -36,7 +47,7 @@ public class GeneralPage extends AppCompatActivity {
                     current_user = task.getResult().getValue(User.class);
                     if(current_user != null) {
 
-                        initializeNavigation(activityXML);
+                        initializeNavigation();
                     } else {
                         Log.e("GroceryApp", "Error getting user data", task.getException());
                     }
@@ -44,19 +55,11 @@ public class GeneralPage extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
     }
 
-    public void initializeNavigation(int activityXML) {
-        setContentView(activityXML);
-        shopButton = findViewById(R.id.shop_button);
-        accountButton = findViewById(R.id.account_button);
-        myStoreButton = findViewById(R.id.my_store_button);
-        cartButton = findViewById(R.id.cart_button);
+    private void initializeNavigation() {
+
+
 
         accountButton.setText(current_user.getName());
 
@@ -84,10 +87,15 @@ public class GeneralPage extends AppCompatActivity {
                 goToAccount();
             }
         });
+
+        initializeOther();
     }
+
+    public void initializeOther() {};
 
     public void goToShop() {
         Intent intent = new Intent(this, ShopActivity.class);
+        intent.putExtra(EXTRA_USER_NAME, current_user.getName());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
@@ -111,24 +119,28 @@ public class GeneralPage extends AppCompatActivity {
 
     public void goToMyStorePage() {
         Intent intent = new Intent(this, MyStoreActivity.class);
+        intent.putExtra(EXTRA_USER_NAME, current_user.getName());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 
     public void goToCreateStore() {
         Intent intent = new Intent(this, CreateStoreActivity.class);
+        intent.putExtra(EXTRA_USER_NAME, current_user.getName());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 
     public void goToCart() {
         Intent intent = new Intent(this, CartActivity.class);
+        intent.putExtra(EXTRA_USER_NAME, current_user.getName());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
 
     public void goToAccount() {
         Intent intent = new Intent(this, AccountActivity.class);
+        intent.putExtra(EXTRA_USER_NAME, current_user.getName());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
