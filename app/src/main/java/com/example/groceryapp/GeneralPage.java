@@ -48,7 +48,8 @@ public class GeneralPage extends AppCompatActivity {
                     if(current_user != null) {
                         initializeNavigation();
                     } else {
-                        startActivity(new Intent(getApplicationContext(),Register.class));
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(getApplicationContext(),Login.class));
                         Log.e("GroceryApp", "Error getting user data", task.getException());
                     }
                 }
