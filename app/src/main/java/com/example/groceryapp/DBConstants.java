@@ -1,5 +1,8 @@
 package com.example.groceryapp;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class DBConstants {
     public static final String USERS_PATH = "Users";
     public static final String USER_NAME = "name";
@@ -23,4 +26,6 @@ public class DBConstants {
     public static final String ORDER_COMPLETE = "is_complete";
 
     public static final String NULL = "null";
+
+    public static final DateFormat dateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
 }

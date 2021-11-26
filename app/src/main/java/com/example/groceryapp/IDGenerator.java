@@ -6,7 +6,7 @@ import java.util.Random;
 public class IDGenerator {
     public static final String STORE_PREFIX = "sto_";
     public static final String ORDER_PREFIX = "ord_";
-    public static final String PRODUCT_PREFIX = "prod_";
+    public static final String PRODUCT_PREFIX = "pro_";
 
     private static final char[] validChars = new char[] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
                                             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',

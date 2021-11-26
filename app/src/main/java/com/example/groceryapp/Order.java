@@ -1,12 +1,16 @@
 package com.example.groceryapp;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Hashtable;
 
 public class Order {
     private String customer_id;
     private ArrayList<OrderItem> items;
     private boolean is_complete = false;
+    private String date;
 
     public boolean is_complete() {
         return is_complete;
@@ -19,6 +23,10 @@ public class Order {
     public Order(String customer_id){
         this.customer_id = customer_id;
         items = new ArrayList<OrderItem>();
+
+        // Get current time
+
+        date = DBConstants.dateFormat.format(Calendar.getInstance().getTime());
     }
 
     //adding item to the Hashtable:
