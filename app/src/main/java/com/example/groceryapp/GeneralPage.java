@@ -51,6 +51,7 @@ public class GeneralPage extends AppCompatActivity {
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(getApplicationContext(),Login.class));
                         Log.e("GroceryApp", "Error getting user data", task.getException());
+                        //startActivity(new Intent(getApplicationContext(), Register.class));
                     }
                 }
             }

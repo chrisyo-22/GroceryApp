@@ -4,17 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/drawable/Bars.xml" value="0.26875" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.12916666666666668" />
+        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.33" />
+        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_cart.xml" value="0.23489583333333333" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_general_page.xml" value="0.33" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_login.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_register.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.23731884057971014" />
-        <entry key="app/src/main/res/layout/activity_account.xml" value="0.10364583333333334" />
-        <entry key="app/src/main/res/layout/activity_create_store.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_my_store.xml" value="0.10364583333333334" />
-        <entry key="app/src/main/res/layout/activity_shop.xml" value="0.22310460300563362" />
-        <entry key="app/src/main/res/layout/activity_shop_product.xml" value="0.335" />
+        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_shop_product.xml" value="0.2234375" />
       </map>
     </option>
   </component>
@@ -27,7 +24,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.1" />
+        <option name="scale" value="0.33" />
       </ProjectState>
     </option>
   </component>
