@@ -25,7 +25,30 @@ public class MyStoreActivity extends GeneralPage {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_store);
+        initializePage(R.layout.activity_my_store);
+
+    }
+
+    @Override
+    public void initializeOther() {
+        storeNameTextView = findViewById(R.id.storeNameText);
+        addressTextView = findViewById(R.id.addressText);
+
+        // Get store of user
+        ref.child(DBConstants.STORES_PATH).child(current_user.getOwned_store_id()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(!task.isSuccessful()) {
+                    Log.e("GroceryApp", "Error getting user's store data", task.getException());
+                } else {
+                    current_user_store = task.getResult().getValue(Store.class);
+                    if(current_user_store != null) {
+                        storeNameTextView.setText(current_user_store.getName());
+                        addressTextView.setText(current_user_store.getAddress());
+                    }
+                }
+            }
+        });
 
         tabLayout = findViewById(R.id.tab_layout);
         pager2 = findViewById(R.id.view_pager2);
@@ -35,8 +58,8 @@ public class MyStoreActivity extends GeneralPage {
         pager2.setAdapter(adapter);
 
         tabLayout.addTab(tabLayout.newTab().setText("Products"));
-        tabLayout.addTab(tabLayout.newTab().setText("New Orders"));
-        tabLayout.addTab(tabLayout.newTab().setText("Completed Orders"));
+        tabLayout.addTab(tabLayout.newTab().setText("Orders"));
+        tabLayout.addTab(tabLayout.newTab().setText("Order History"));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -59,32 +82,6 @@ public class MyStoreActivity extends GeneralPage {
             @Override
             public void onPageSelected(int position) {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
-            }
-        });
-
-
-
-
-    }
-
-    @Override
-    public void initializeOther() {
-        storeNameTextView = findViewById(R.id.storeNameText);
-        addressTextView = findViewById(R.id.addressText);
-
-        // Get store of user
-        ref.child(DBConstants.STORES_PATH).child(current_user.getOwned_store_id()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(!task.isSuccessful()) {
-                    Log.e("GroceryApp", "Error getting user's store data", task.getException());
-                } else {
-                    current_user_store = task.getResult().getValue(Store.class);
-                    if(current_user_store != null) {
-                        storeNameTextView.setText(current_user_store.getName());
-                        addressTextView.setText(current_user_store.getAddress());
-                    }
-                }
             }
         });
     }

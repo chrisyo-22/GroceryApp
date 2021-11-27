@@ -18,12 +18,12 @@ public class FragmentAdapter extends FragmentStateAdapter {
 
         switch (position){
             case 1 :
-                return new SecondFragment();
+                return new MyStoreOrdersFragment();
             case 2 :
-                return new ThirdFragment();
+                return new MyStoreHistoryFragment();
         }
 
-        return new FirstFragment();
+        return new MyStoreProductsFragment();
     }
 
     @Override
