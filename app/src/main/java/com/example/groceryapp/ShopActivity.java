@@ -51,9 +51,21 @@ public class ShopActivity extends GeneralPage {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("demo", "data changed");
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Store store = child.getValue(Store.class);
+                for (DataSnapshot EachStore : dataSnapshot.getChildren()) {
+
+                    Store store = EachStore.getValue(Store.class);
+
+                    //add products into the store
+                    //the products node within each store object in firebase is a map of products
+                    //and not a list of products, so add each into the product list using a for loop
+                    DataSnapshot Products = EachStore.child("products");
+                    for (DataSnapshot EachProduct : Products.getChildren()){
+                        store.adding_store_products(EachProduct.getValue(Product.class));
+                    }
+
                     store_list.add(store);
+
+                    //for each item on listview: display store name and address
                     Map<String, String> single_store = new HashMap<String, String>(2);
                     single_store.put("First Line", store.getName());
                     single_store.put("Second Line",store.getAddress());
@@ -75,8 +87,7 @@ public class ShopActivity extends GeneralPage {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
                 Intent intent = new Intent();
                 intent.setClass(ShopActivity.this, ShopProductActivity.class);
-                //Bundle bundle = new Bundle();
-                //bundle.putSerializable("store",store_list.get(index));
+                //send the information of the store clicked to next activity
                 intent.putExtra("store",store_list.get(index));
                 startActivity(intent);
             }
