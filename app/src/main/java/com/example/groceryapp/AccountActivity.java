@@ -49,7 +49,10 @@ public class AccountActivity extends GeneralPage {
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if(task.isSuccessful()) {
                                 Store owner_store = task.getResult().getValue(Store.class);
-                                owned_store_tag.setText(owner_store.getName());
+                                if(owner_store != null)
+                                    owned_store_tag.setText(owner_store.getName());
+                                else
+                                    owned_store_tag.setText("N/a");
                             }
                             else{
                                 Log.e("GroceryApp", "Error getting user data", task.getException());

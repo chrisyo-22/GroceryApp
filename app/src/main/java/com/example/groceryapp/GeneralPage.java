@@ -32,7 +32,7 @@ public class GeneralPage extends AppCompatActivity {
         cartButton = findViewById(R.id.cart_button);
         accountButton = findViewById(R.id.account_button);
 
-        accountButton.setText(getIntent().getStringExtra(EXTRA_USER_NAME));
+        accountButton.setText(DBConstants.restrictNameLength(getIntent().getStringExtra(EXTRA_USER_NAME)));
 
         // Get database and user data
         ref = FirebaseDatabase.getInstance().getReference();
@@ -61,7 +61,7 @@ public class GeneralPage extends AppCompatActivity {
 
     private void initializeNavigation() {
 
-        accountButton.setText(current_user.getName());
+        accountButton.setText(DBConstants.restrictNameLength(current_user.getName()));
 
         shopButton.setOnClickListener(new View.OnClickListener() {
             @Override
