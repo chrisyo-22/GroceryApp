@@ -10,12 +10,23 @@
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_register.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.23731884057971014" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_my_store.xml" value="0.2857142857142857" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_register.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.33" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop_product.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_first.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_my_store_history.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_my_store_orders.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_my_store_products.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_second.xml" value="0.20885416666666667" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_third.xml" value="0.20885416666666667" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_create_store.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_my_store.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_shop.xml" value="0.22310460300563362" />
         <entry key="app/src/main/res/layout/activity_shop_product.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/sample_product.xml" value="0.3723904432578698" />
       </map>
     </option>
   </component>
