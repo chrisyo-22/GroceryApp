@@ -45,7 +45,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressText"
         app:tabIndicatorColor="#8C4598"
-        app:tabSelectedTextColor="#8C4598" />
+        app:tabSelectedTextColor="#8C4598"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager2"
