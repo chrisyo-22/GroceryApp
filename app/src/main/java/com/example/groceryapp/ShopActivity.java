@@ -52,7 +52,7 @@ public class ShopActivity extends GeneralPage {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("demo", "data changed");
                 for (DataSnapshot EachStore : dataSnapshot.getChildren()) {
-
+                    //Log.i("demo", "How many times");
                     Store store = EachStore.getValue(Store.class);
 
                     //add products into the store
