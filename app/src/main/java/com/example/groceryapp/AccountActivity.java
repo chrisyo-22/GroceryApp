@@ -53,6 +53,7 @@ public class AccountActivity extends GeneralPage {
                                     owned_store_tag.setText(owner_store.getName());
                                 else
                                     owned_store_tag.setText("N/a");
+
                             }
                             else{
                                 Log.e("GroceryApp", "Error getting user data", task.getException());
