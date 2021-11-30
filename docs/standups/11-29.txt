@@ -1,0 +1,60 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- Model-view-presenter for login/register
+- Bug fixes
+
+What are you planning on doing today?
+
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Bug fixes
+
+What are you planning on doing today?
+- Owner create product
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- User cart, create orders
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+- My Store page GUI
+
+What are you planning on doing today?
+- List of orders for owner and mark order as complete
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+- Display stores to customers
+- Display products in store
+
+What are you planning on doing today?
+- Make the GUI look more pleasing
+
+Any impediments or stumbling blocks?
