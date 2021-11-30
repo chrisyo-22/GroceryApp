@@ -51,7 +51,7 @@ public class Store implements Serializable {
         this.address = address;
     }
 
-    public void adding_store_products(Product product){
+    public void add_store_product(Product product){
         products.add(product);
     }
 

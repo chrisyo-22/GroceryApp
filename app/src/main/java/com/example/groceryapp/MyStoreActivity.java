@@ -54,7 +54,7 @@ public class MyStoreActivity extends GeneralPage {
         pager2 = findViewById(R.id.view_pager2);
 
         FragmentManager fm = getSupportFragmentManager();
-        adapter = new FragmentAdapter(fm, getLifecycle());
+        adapter = new FragmentAdapter(fm, getLifecycle(), current_user.getOwned_store_id());
         pager2.setAdapter(adapter);
 
         tabLayout.addTab(tabLayout.newTab().setText("Products"));

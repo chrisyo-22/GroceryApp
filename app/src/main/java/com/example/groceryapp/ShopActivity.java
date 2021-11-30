@@ -46,7 +46,7 @@ public class ShopActivity extends GeneralPage {
         stores_lv.setAdapter(adapter);
 
         //reading all the stores!
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Stores");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH);
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,9 +58,9 @@ public class ShopActivity extends GeneralPage {
                     //add products into the store
                     //the products node within each store object in firebase is a map of products
                     //and not a list of products, so add each into the product list using a for loop
-                    DataSnapshot Products = EachStore.child("products");
+                    DataSnapshot Products = EachStore.child(DBConstants.STORE_PRODUCTS);
                     for (DataSnapshot EachProduct : Products.getChildren()){
-                        store.adding_store_products(EachProduct.getValue(Product.class));
+                        store.add_store_product(EachProduct.getValue(Product.class));
                     }
 
                     store_list.add(store);

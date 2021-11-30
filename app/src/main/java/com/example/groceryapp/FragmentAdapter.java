@@ -8,8 +8,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class FragmentAdapter extends FragmentStateAdapter {
 
-    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private String owned_store_id;
+
+    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String owned_store_id) {
         super(fragmentManager, lifecycle);
+        this.owned_store_id = owned_store_id;
     }
 
     @NonNull
@@ -23,7 +26,7 @@ public class FragmentAdapter extends FragmentStateAdapter {
                 return new MyStoreHistoryFragment();
         }
 
-        return new MyStoreProductsFragment();
+        return MyStoreProductsFragment.newInstance(owned_store_id);
     }
 
     @Override
