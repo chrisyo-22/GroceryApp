@@ -93,4 +93,7 @@ public class ShopActivity extends GeneralPage {
             }
         });
     }
+
+
+
 }
