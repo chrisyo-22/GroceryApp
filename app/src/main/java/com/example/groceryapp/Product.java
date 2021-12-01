@@ -1,21 +1,24 @@
 package com.example.groceryapp;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Product implements Serializable {
 
     private String brand;
-    private float price;
+    private int price; // in cents
     private String name;
+
+    private final DecimalFormat df = new DecimalFormat("#.00");
 
     public Product() {
         this.brand = "null-brand";
-        this.price = -1.0f;
+        this.price = 0;
         this.name = "null-name";
     }
 
-    public Product(String brand, float price, String name) {
+    public Product(String brand, int price, String name) {
         this.brand = brand;
         this.price = price;
         this.name = name;
@@ -29,11 +32,15 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public String getPriceAsString(boolean withDollarSign) {
+        return (withDollarSign ? "$" : "") + df.format(((double)price)/100.0);
+    }
+
+    public void setPrice(int price) {
         this.price = price;
     }
 

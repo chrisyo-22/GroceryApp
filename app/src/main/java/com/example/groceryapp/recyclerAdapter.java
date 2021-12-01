@@ -44,11 +44,11 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
         String product_name = productList.get(position).getName();
         String product_brand = productList.get(position).getBrand();
-        float product_price = productList.get(position).getPrice();
+        String product_price = productList.get(position).getPriceAsString(true);
 
         holder.product_name.setText(product_name);
         holder.product_brand.setText(product_brand);
-        holder.product_price.setText(String.valueOf(product_price));
+        holder.product_price.setText(product_price);
 
         //clicking each add_order_btn action to be added here:
         holder.add_to_order.setOnClickListener(new View.OnClickListener() {
