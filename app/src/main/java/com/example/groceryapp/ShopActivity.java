@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +52,7 @@ public class ShopActivity extends GeneralPage {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("demo", "data changed");
+                //Log.i("demo", "data changed");
                 for (DataSnapshot EachStore : dataSnapshot.getChildren()) {
                     //Log.i("demo", "How many times");
                     Store store = EachStore.getValue(Store.class);
@@ -70,17 +72,20 @@ public class ShopActivity extends GeneralPage {
                     single_store.put("First Line", store.getName());
                     single_store.put("Second Line",store.getAddress());
                     stores_to_display.add(single_store);
-                    Log.i("demo", store.getName());
+                   // Log.i("demo", store.getName());
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("warning", "loadPost:onCancelled", databaseError.toException());
+                //Log.w("warning", "loadPost:onCancelled", databaseError.toException());
             }
         };
         ref.addValueEventListener(listener);
+
+        //saving product id:
+
 
         stores_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,6 +94,22 @@ public class ShopActivity extends GeneralPage {
                 intent.setClass(ShopActivity.this, ShopProductActivity.class);
                 //send the information of the store clicked to next activity
                 intent.putExtra("store",store_list.get(index));
+
+                //store product_id into hashmap:
+                HashMap<String,Product> id_to_product = new HashMap<String,Product>();
+                ref.child(""/*this replace with store_id*/).child("products").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot child:snapshot.getChildren()) {
+                            Product product = child.getValue(Product.class);
+                            id_to_product.put(child.getKey(),product);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+                intent.putExtra("id_to_product",id_to_product);
                 startActivity(intent);
             }
         });
