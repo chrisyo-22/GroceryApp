@@ -1,0 +1,60 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- Creating order
+
+What are you planning on doing today?
+
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- Bug fixes
+- Owner create product (complete)
+- owner display product (complete)
+
+What are you planning on doing today?
+
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Hyunmo Jeong
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- User cart, create orders
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+- List of orders for owner (rough)
+
+What are you planning on doing today?
+- mark order as complete
+
+Any impediments or stumbling blocks?
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- Solve problem of storing product IDS for order
+
+Any impediments or stumbling blocks?
