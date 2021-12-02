@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +19,7 @@ public class MyStoreActivity extends GeneralPage {
     TextView storeNameTextView, addressTextView;
     Store current_user_store;
     TabLayout tabLayout;
+
     ViewPager2 pager2;
     FragmentAdapter adapter;
 

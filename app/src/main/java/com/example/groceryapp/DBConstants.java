@@ -2,6 +2,7 @@ package com.example.groceryapp;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class DBConstants {
     public static final int MAX_DISPLAY_NAME_LENGTH = 17;
@@ -37,4 +38,5 @@ public class DBConstants {
 
         return name.substring(0, MAX_DISPLAY_NAME_LENGTH) + "...";
     }
+
 }
