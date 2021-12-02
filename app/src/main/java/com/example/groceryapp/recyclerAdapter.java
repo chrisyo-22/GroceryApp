@@ -103,7 +103,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
                             for (DataSnapshot order : snapshot.getChildren()) {
                                 String current_order_id = order.getKey();
                                     Order current_order = order.getValue(Order.class);
-                                if (current_order.getOrder_store_id().equals(store_id)) {
+                                if (current_order.getOrder_store_id().equals(store_id) && current_order.isIs_complete()==false&&current_order.isIs_processing()==false) {
                                     is_order_new_store = false;
                                     if (current_order.getItems_ids().get(product_id)!= null) {
                                         int current_quantity = current_order.getItems_ids().get(product_id);
