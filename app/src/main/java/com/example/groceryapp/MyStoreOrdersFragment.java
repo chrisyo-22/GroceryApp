@@ -1,6 +1,5 @@
 package com.example.groceryapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +27,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,7 +84,6 @@ public class MyStoreOrdersFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         ListView listView = (ListView) view.findViewById(R.id.orders_list);
 
         ArrayList<String> ordersList = new ArrayList<>();
@@ -101,26 +107,27 @@ public class MyStoreOrdersFragment extends Fragment {
                     //Log.i("demo","my userid is "+user_store_id);
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH).child(user_store_id).child(DBConstants.STORE_ORDERS);
 
-
-                    ValueEventListener listener =  new ValueEventListener() {
+                    reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             ordersList.clear();
                             if(!dataSnapshot.exists()){
+                                //do something here if the user have no order in his/her store
                                 Log.i("demo", "hey u have no order");
                             }
 
                             else{
-
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                                     String user_id = snapshot.getValue().toString();
                                     String order_id = snapshot.getKey();
-
-                                    FirebaseDatabase.getInstance().getReference("Users").child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(user_id);
+                                    reference_2.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             ordersList.add(snapshot.child("name").getValue().toString());
+                                            Log.i("demo", "hey "+ordersList);
+
                                         }
 
                                         @Override
@@ -129,27 +136,16 @@ public class MyStoreOrdersFragment extends Fragment {
                                         }
                                     });
 
-
-
                                 }
+                                Log.i("demo", "hello "+ordersList);
                                 listViewAdapter.notifyDataSetChanged();
                             }
+
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    };
-                    reference.addValueEventListener(listener);
-
-
-
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), MyStoreOrderSummary.class);
-                            startActivity(intent);
                         }
                     });
                 }

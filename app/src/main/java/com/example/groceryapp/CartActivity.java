@@ -74,7 +74,7 @@ public class CartActivity extends GeneralPage {
                     for(DataSnapshot orderSnap : task.getResult().getChildren()) {
                         Order order = orderSnap.getValue(Order.class);
                         Log.println(Log.DEBUG, "demo", order.getOrder_store_id());
-
+                        order_list.clear();
                         if(tabPos == CART_TAB) {
 
                         } else if(tabPos == PROCESSING_TAB) {
