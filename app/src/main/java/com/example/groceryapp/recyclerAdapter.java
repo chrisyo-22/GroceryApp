@@ -88,38 +88,79 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
                 ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (!snapshot.child("localOrders").exists()) {
+                        //if the user has no order within local:
+                        if(!snapshot.child("localOrders").exists()){
                             String order_id = IDGenerator.generateID(IDGenerator.ORDER_PREFIX);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("customer_id").setValue(current_user_id);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("products").child(product_id).setValue(1);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("ordered_store_id").setValue(store_id);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("order_sent").setValue(false);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("is_complete").setValue(false);
-                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("date").setValue(DBConstants.dateFormat.format(Calendar.getInstance().getTime()));
-                        } else if (snapshot.child("localOrders").exists()) {
+                            //Order(String customer_id,boolean order_sent, String order_store_id, HashMap<String, Integer> items_ids)
+                            HashMap<String, Integer> id_to_product = new HashMap<String, Integer>();
+                            id_to_product.put(product_id,1);
+                            Order new_order = new Order(current_user_id, false,store_id,id_to_product);
+                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).setValue(new_order);
+                        }
+                        //if the user has local orders, loop through all of them. And check the user has order in this store
+                        else if (snapshot.child("localOrders").exists()) {
                             boolean is_order_new_store = true;
                             for (DataSnapshot order : snapshot.child("localOrders").getChildren()) {
                                 String current_order_id = order.getKey();
-                                if (order.child("ordered_store_id").getValue(String.class).equals(store_id)) {
+                                    Order current_order = order.getValue(Order.class);
+                                if (current_order.getOrder_store_id().equals(store_id)) {
                                     is_order_new_store = false;
-                                    if (order.child("products").child((product_id)).exists()) {
-                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).child("products").child(product_id).setValue(ServerValue.increment(1));
+                                    if (current_order.getItems_ids().get(product_id)!= null) {
+                                        int current_quantity = current_order.getItems_ids().get(product_id);
+                                        current_quantity++;
+                                        current_order.getItems_ids().put(product_id,current_quantity);
+                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).setValue(current_order);
+
 
                                     } else {
-                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).child("products").child(product_id).setValue(1);
+                                        current_order.getItems_ids().put(product_id,1);
+                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).setValue(current_order);
                                     }
                                 }
                             }
+                            //if the user have not been order this store, simply create one.
                             if(is_order_new_store == true){
                                 String order_id = IDGenerator.generateID(IDGenerator.ORDER_PREFIX);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("customer_id").setValue(current_user_id);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("products").child(product_id).setValue(1);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("ordered_store_id").setValue(store_id);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("order_sent").setValue(false);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("is_complete").setValue(false);
-                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("date").setValue(DBConstants.dateFormat.format(Calendar.getInstance().getTime()));
+                                //Order(String customer_id,boolean order_sent, String order_store_id, HashMap<String, Integer> items_ids)
+                                HashMap<String, Integer> id_to_product = new HashMap<String, Integer>();
+                                id_to_product.put(product_id,1);
+                                Order new_order = new Order(current_user_id, false,store_id,id_to_product);
+                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).setValue(new_order);
                             }
                         }
+//                        if (!snapshot.child("localOrders").exists()) {
+//                            String order_id = IDGenerator.generateID(IDGenerator.ORDER_PREFIX);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("customer_id").setValue(current_user_id);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("products").child(product_id).setValue(1);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("ordered_store_id").setValue(store_id);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("order_sent").setValue(false);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("is_complete").setValue(false);
+//                            ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("date").setValue(DBConstants.dateFormat.format(Calendar.getInstance().getTime()));
+//
+//                        } else if (snapshot.child("localOrders").exists()) {
+//                            boolean is_order_new_store = true;
+//                            for (DataSnapshot order : snapshot.child("localOrders").getChildren()) {
+//                                String current_order_id = order.getKey();
+//                                if (order.child("ordered_store_id").getValue(String.class).equals(store_id)) {
+//                                    is_order_new_store = false;
+//                                    if (order.child("products").child((product_id)).exists()) {
+//                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).child("products").child(product_id).setValue(ServerValue.increment(1));
+//
+//                                    } else {
+//                                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(current_order_id).child("products").child(product_id).setValue(1);
+//                                    }
+//                                }
+//                            }
+//                            if(is_order_new_store == true){
+//                                String order_id = IDGenerator.generateID(IDGenerator.ORDER_PREFIX);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("customer_id").setValue(current_user_id);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("products").child(product_id).setValue(1);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("ordered_store_id").setValue(store_id);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("order_sent").setValue(false);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("is_complete").setValue(false);
+//                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child("orders").child("localOrders").child(order_id).child("date").setValue(DBConstants.dateFormat.format(Calendar.getInstance().getTime()));
+//                            }
+//                        }
                     }
                         @Override
                         public void onCancelled (@NonNull DatabaseError error){
