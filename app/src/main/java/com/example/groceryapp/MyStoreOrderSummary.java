@@ -50,7 +50,6 @@ public class MyStoreOrderSummary extends AppCompatActivity {
                     //Log.i("demo","my userid is "+user_store_id);
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH).child(user_store_id).child(DBConstants.STORE_ORDERS).child("order1");
 
-
                     ValueEventListener listener = new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

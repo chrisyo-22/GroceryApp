@@ -107,7 +107,6 @@ public class MyStoreOrdersFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             ordersList.clear();
                             if(!dataSnapshot.exists()){
-                                //do something here if the user have no order in his/her store
                                 Log.i("demo", "hey u have no order");
                             }
 
@@ -115,8 +114,23 @@ public class MyStoreOrdersFragment extends Fragment {
 
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                                    ordersList.add(snapshot.child("name").getValue().toString() + "        "+
-                                                   snapshot.child("date").getValue().toString());
+                                    String user_id = snapshot.getValue().toString();
+                                    String order_id = snapshot.getKey();
+
+                                    FirebaseDatabase.getInstance().getReference("Users").child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            ordersList.add(snapshot.child("name").getValue().toString());
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+
                                 }
                                 listViewAdapter.notifyDataSetChanged();
                             }
