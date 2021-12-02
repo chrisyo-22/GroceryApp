@@ -1,0 +1,50 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- redesign database for orders
+
+What are you planning on doing today?
+- User create orders
+
+Any impediments or stumbling blocks?
+- One group member ditched last minute
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+- redesign database for orders
+
+What are you planning on doing today?
+- My cart page GUI
+
+Any impediments or stumbling blocks?
+- One group member ditched last minute
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+- List of orders for owner (rough)
+
+What are you planning on doing today?
+- List of orders for owner (complete)
+- Owner mark order as completed
+
+Any impediments or stumbling blocks?
+- One group member ditched last minute
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- Work with Chris in completing the order stuff
+
+Any impediments or stumbling blocks?
+- One group member ditched last minute
