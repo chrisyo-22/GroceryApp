@@ -1,5 +1,7 @@
 package com.example.groceryapp;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
@@ -9,6 +11,17 @@ public class Product implements Serializable {
     private String brand;
     private int price; // in cents
     private String name;
+    @Exclude
+    private String product_id;
+    public String getId() {
+        return product_id;
+    }
+
+    public void setId(String product_id) {
+        this.product_id = product_id;
+    }
+
+
 
     private final DecimalFormat df = new DecimalFormat("#.00");
 

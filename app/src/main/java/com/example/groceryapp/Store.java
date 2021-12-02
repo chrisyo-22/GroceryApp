@@ -1,5 +1,7 @@
 package com.example.groceryapp;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,6 +9,9 @@ public class Store implements Serializable {
     private String owner_id;
     private String name;
     private String address;
+
+    @Exclude
+    private String id;
 
     ArrayList<Order> orders;
     ArrayList<Product> products;
@@ -25,6 +30,13 @@ public class Store implements Serializable {
         this.address = address;
         orders = new ArrayList<Order>();
         products = new ArrayList<Product>();
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOwner_id() {

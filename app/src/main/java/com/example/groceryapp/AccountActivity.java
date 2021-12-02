@@ -17,10 +17,13 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
+import java.lang.reflect.Method;
+
 public class AccountActivity extends GeneralPage {
-    Button logout_btn;
+    Button logout_btn,reset_psw_btn;
     TextView email_tag,owned_store_tag;
     EditText name_tag;
     public static final String EXTRA_USER_NAME = "com.example.groceryapp.USER_NAME";
@@ -31,6 +34,7 @@ public class AccountActivity extends GeneralPage {
         email_tag = findViewById(R.id.email_tag);
         owned_store_tag = findViewById(R.id.owner_store_tag);
         name_tag = findViewById(R.id.name_tag);
+        reset_psw_btn = findViewById(R.id.change_pswd_btn);
 
 
 
@@ -44,6 +48,7 @@ public class AccountActivity extends GeneralPage {
                     User current_user = task.getResult().getValue(User.class);
                     email_tag.setText(current_user.getEmail());
                     name_tag.setText(current_user.getName());
+
                     ref.child(DBConstants.STORES_PATH).child(current_user.getOwned_store_id()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -90,7 +95,23 @@ public class AccountActivity extends GeneralPage {
             }
 
         });
+        reset_psw_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset_psw_btn();
+            }
+        });
 
+
+    }
+    public void reset_psw_btn(){
+        //String current_user_id = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email_tag.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(AccountActivity.this, "Reset Password Request Sent!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

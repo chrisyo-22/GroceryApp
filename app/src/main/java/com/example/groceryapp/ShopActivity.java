@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,7 @@ public class ShopActivity extends GeneralPage {
     List<Map<String, String>> stores_to_display;
     ArrayList<Store> store_list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class ShopActivity extends GeneralPage {
         stores_lv = (ListView) findViewById(R.id.shop_store_list);
         stores_to_display = new ArrayList<Map<String, String>>();
         store_list = new ArrayList<Store>();
+
         ListingStores();
     }
 
@@ -50,17 +54,20 @@ public class ShopActivity extends GeneralPage {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("demo", "data changed");
+                //Log.i("demo", "data changed");
                 for (DataSnapshot EachStore : dataSnapshot.getChildren()) {
                     //Log.i("demo", "How many times");
                     Store store = EachStore.getValue(Store.class);
-
+                    store.setId(EachStore.getKey());
                     //add products into the store
                     //the products node within each store object in firebase is a map of products
                     //and not a list of products, so add each into the product list using a for loop
                     DataSnapshot Products = EachStore.child(DBConstants.STORE_PRODUCTS);
                     for (DataSnapshot EachProduct : Products.getChildren()){
-                        store.add_store_product(EachProduct.getValue(Product.class));
+                        Product each_product = EachProduct.getValue(Product.class);
+                        each_product.setId(EachProduct.getKey());
+                        store.add_store_product(each_product);
+
                     }
 
                     store_list.add(store);
@@ -70,17 +77,20 @@ public class ShopActivity extends GeneralPage {
                     single_store.put("First Line", store.getName());
                     single_store.put("Second Line",store.getAddress());
                     stores_to_display.add(single_store);
-                    Log.i("demo", store.getName());
+                   // Log.i("demo", store.getName());
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.w("warning", "loadPost:onCancelled", databaseError.toException());
+                //Log.w("warning", "loadPost:onCancelled", databaseError.toException());
             }
         };
         ref.addValueEventListener(listener);
+
+        //saving product id:
+
 
         stores_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
