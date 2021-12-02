@@ -28,6 +28,7 @@ public class ShopActivity extends GeneralPage {
     List<Map<String, String>> stores_to_display;
     ArrayList<Store> store_list;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class ShopActivity extends GeneralPage {
         stores_lv = (ListView) findViewById(R.id.shop_store_list);
         stores_to_display = new ArrayList<Map<String, String>>();
         store_list = new ArrayList<Store>();
+
         ListingStores();
     }
 
@@ -56,13 +58,16 @@ public class ShopActivity extends GeneralPage {
                 for (DataSnapshot EachStore : dataSnapshot.getChildren()) {
                     //Log.i("demo", "How many times");
                     Store store = EachStore.getValue(Store.class);
-
+                    store.setId(EachStore.getKey());
                     //add products into the store
                     //the products node within each store object in firebase is a map of products
                     //and not a list of products, so add each into the product list using a for loop
                     DataSnapshot Products = EachStore.child(DBConstants.STORE_PRODUCTS);
                     for (DataSnapshot EachProduct : Products.getChildren()){
-                        store.add_store_product(EachProduct.getValue(Product.class));
+                        Product each_product = EachProduct.getValue(Product.class);
+                        each_product.setId(EachProduct.getKey());
+                        store.add_store_product(each_product);
+
                     }
 
                     store_list.add(store);
@@ -94,22 +99,6 @@ public class ShopActivity extends GeneralPage {
                 intent.setClass(ShopActivity.this, ShopProductActivity.class);
                 //send the information of the store clicked to next activity
                 intent.putExtra("store",store_list.get(index));
-
-                //store product_id into hashmap:
-                HashMap<String,Product> id_to_product = new HashMap<String,Product>();
-                ref.child(""/*this replace with store_id*/).child("products").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot child:snapshot.getChildren()) {
-                            Product product = child.getValue(Product.class);
-                            id_to_product.put(child.getKey(),product);
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-                intent.putExtra("id_to_product",id_to_product);
                 startActivity(intent);
             }
         });

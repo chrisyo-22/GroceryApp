@@ -232,9 +232,9 @@ public class MyStoreProductsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int currentPrice = Math.round(Float.parseFloat(input.getText().toString())*100);
-
-                Product new_product = new Product(currentAddProductBrand, currentPrice, currentAddProductName);
                 String prod_id = defaultProduct == null ? IDGenerator.generateID(IDGenerator.PRODUCT_PREFIX) : product_list_ids.get(selectedItem);
+                Product new_product = new Product(currentAddProductBrand, currentPrice, currentAddProductName);
+
 
                 ref_to_store_products.child(prod_id).setValue(new_product);
             }

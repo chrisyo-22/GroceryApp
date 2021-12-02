@@ -28,7 +28,7 @@ public class ShopProductActivity extends GeneralPage {
         Store store = (Store) intent.getSerializableExtra("store");
 
         //store store_id:
-        store_id = store.getName();
+        store_id = store.getId();
 
         setProductInfo(store);
         setAdapter();
