@@ -11,6 +11,7 @@ public class Order {
     private boolean order_sent;
     private String order_store_id;
     private HashMap<String, Integer> items_ids;
+    private String date;
 
     public String getCustomer_id() {
         return customer_id;
@@ -62,11 +63,13 @@ public class Order {
 
     private boolean is_complete = false;
 
-    //private String date;
+
 
     @Exclude
     private String id;
+    public Order(){
 
+    }
 
     public Order(String customer_id,boolean order_sent, String order_store_id, HashMap<String, Integer> items_ids){
         this.customer_id = customer_id;
@@ -76,7 +79,7 @@ public class Order {
 
         // Get current time
 
-        //date = DBConstants.dateFormat.format(Calendar.getInstance().getTime());
+        date = DBConstants.dateFormat.format(Calendar.getInstance().getTime());
     }
 
 
