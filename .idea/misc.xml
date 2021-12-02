@@ -4,27 +4,26 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/drawable/Bars.xml" value="0.26875" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.5" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_create_store.xml" value="0.2557291666666667" />
+        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.12916666666666668" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_general_page.xml" value="0.33" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_login.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_my_store.xml" value="0.38691883372734437" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_register.xml" value="0.67" />
         <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.5" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/activity_shop_product.xml" value="0.33" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/fragment_my_store_history.xml" value="0.67" />
-        <entry key="..\:/Android_apps/B07FinalProject/app/src/main/res/layout/fragment_my_store_orders.xml" value="0.4214618973561431" />
+
+
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_account.xml" value="0.371875" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_my_store.xml" value="0.371875" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.371875" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop_product.xml" value="0.371875" />
-        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_my_store_products.xml" value="0.371875" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_create_store.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_my_store.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_shop.xml" value="0.22310460300563362" />
         <entry key="app/src/main/res/layout/activity_shop_product.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_trytest.xml" value="0.24940087239195483" />
+        <entry key="app/src/main/res/layout/fragment_my_store_orders.xml" value="0.25035719676468976" />
+        <entry key="app/src/main/res/layout/fragment_my_store_products.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/layout/sample_product.xml" value="0.3723904432578698" />
       </map>
     </option>
