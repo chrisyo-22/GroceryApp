@@ -11,7 +11,8 @@ public class Order {
     private boolean order_sent;
     private String order_store_id;
     private HashMap<String, Integer> items_ids;
-    private String date;
+    private boolean is_processing = false;
+   // private String date;
 
     public String getCustomer_id() {
         return customer_id;
@@ -19,10 +20,6 @@ public class Order {
 
     public void setCustomer_id(String customer_id) {
         this.customer_id = customer_id;
-    }
-
-    public boolean isOrder_sent() {
-        return order_sent;
     }
 
     public void setOrder_sent(boolean order_sent) {
@@ -63,6 +60,14 @@ public class Order {
 
     private boolean is_complete = false;
 
+    public boolean isIs_processing() {
+        return is_processing;
+    }
+
+    public void setIs_processing(boolean is_processing) {
+        this.is_processing = is_processing;
+    }
+
 
 
     @Exclude
@@ -71,15 +76,15 @@ public class Order {
 
     }
 
-    public Order(String customer_id,boolean order_sent, String order_store_id, HashMap<String, Integer> items_ids){
+    public Order(String customer_id,boolean order_sent, boolean is_complete, String order_store_id, HashMap<String, Integer> items_ids){
         this.customer_id = customer_id;
         this.items_ids = items_ids;
-        this.order_sent = order_sent;
         this.order_store_id = order_store_id;
-
+        this.is_complete = is_processing;
+        this.is_complete = is_complete;
         // Get current time
-
-        date = DBConstants.dateFormat.format(Calendar.getInstance().getTime());
+        //this.date = date;
+        //DBConstants.dateFormat.format(Calendar.getInstance().getTime());
     }
 
 
