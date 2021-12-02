@@ -41,13 +41,7 @@ public class CartActivity extends GeneralPage {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == CART_TAB) {
 
-                } else if(tab.getPosition() == PROCESSING_TAB) {
-
-                } else if(tab.getPosition() == COMPLETED_TAB) {
-
-                }
                 updateCartList(tab.getPosition());
             }
 
@@ -80,6 +74,14 @@ public class CartActivity extends GeneralPage {
                     for(DataSnapshot orderSnap : task.getResult().getChildren()) {
                         Order order = orderSnap.getValue(Order.class);
                         Log.println(Log.DEBUG, "demo", order.getOrder_store_id());
+
+                        if(tabPos == CART_TAB) {
+
+                        } else if(tabPos == PROCESSING_TAB) {
+
+                        } else if(tabPos == COMPLETED_TAB) {
+
+                        }
                     }
                 }
             }
