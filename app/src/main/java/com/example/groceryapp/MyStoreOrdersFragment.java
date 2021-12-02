@@ -1,5 +1,6 @@
 package com.example.groceryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -75,6 +77,7 @@ public class MyStoreOrdersFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         ListView listView = (ListView) view.findViewById(R.id.orders_list);
 
         ArrayList<String> ordersList = new ArrayList<>();
@@ -98,7 +101,8 @@ public class MyStoreOrdersFragment extends Fragment {
                     //Log.i("demo","my userid is "+user_store_id);
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH).child(user_store_id).child(DBConstants.STORE_ORDERS);
 
-                    reference.addValueEventListener(new ValueEventListener() {
+
+                    ValueEventListener listener =  new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             ordersList.clear();
@@ -108,17 +112,30 @@ public class MyStoreOrdersFragment extends Fragment {
                             }
 
                             else{
+
                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    ordersList.add(snapshot.getValue().toString());
+
+                                    ordersList.add(snapshot.child("name").getValue().toString() + "        "+
+                                                   snapshot.child("date").getValue().toString());
                                 }
                                 listViewAdapter.notifyDataSetChanged();
                             }
-
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    };
+                    reference.addValueEventListener(listener);
+
+
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(), trytest.class);
+                            startActivity(intent);
                         }
                     });
                 }
