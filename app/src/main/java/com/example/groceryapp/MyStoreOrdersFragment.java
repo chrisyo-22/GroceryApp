@@ -134,7 +134,7 @@ public class MyStoreOrdersFragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
                             Intent intent = new Intent();
-                            intent.setClass(getActivity(), trytest.class);
+                            intent.setClass(getActivity(), MyStoreOrderSummary.class);
                             startActivity(intent);
                         }
                     });
