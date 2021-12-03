@@ -1,6 +1,7 @@
 package com.example.groceryapp;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -27,6 +28,7 @@ public class DBConstants {
     public static final String ORDER_CUSTOMERID = "customer_id";
     public static final String ORDER_ITEMS = "items";
     public static final String ORDER_COMPLETE = "is_complete";
+    public static final String ORDER_PROCESS = "is_processing";
 
     public static final String NULL = "null";
 
@@ -37,6 +39,10 @@ public class DBConstants {
         if(name.length() < MAX_DISPLAY_NAME_LENGTH) return name;
 
         return name.substring(0, MAX_DISPLAY_NAME_LENGTH) + "...";
+    }
+    public static String getPriceAsString(int price) {
+        final DecimalFormat df = new DecimalFormat("#.00");
+        return ( "$" + df.format(((double)price)/100.0));
     }
 
 }
