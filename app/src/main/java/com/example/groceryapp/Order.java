@@ -2,17 +2,19 @@ package com.example.groceryapp;
 
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class Order {
+public class Order implements Serializable {
     private String customer_id;
     private boolean order_sent;
     private String order_store_id;
     private HashMap<String, Integer> items_ids;
     private boolean is_processing = false;
    // private String date;
+
 
     public String getCustomer_id() {
         return customer_id;

@@ -127,7 +127,7 @@ public class MyStoreOrdersFragment extends Fragment {
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             ordersList.add(snapshot.child("name").getValue().toString());
                                             Log.i("demo", "hey "+ordersList);
-
+                                            listViewAdapter.notifyDataSetChanged();
                                         }
 
                                         @Override
@@ -138,7 +138,7 @@ public class MyStoreOrdersFragment extends Fragment {
 
                                 }
                                 Log.i("demo", "hello "+ordersList);
-                                listViewAdapter.notifyDataSetChanged();
+
                             }
 
                         }
