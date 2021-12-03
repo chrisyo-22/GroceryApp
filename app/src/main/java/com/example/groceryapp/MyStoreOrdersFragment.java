@@ -155,6 +155,7 @@ public class MyStoreOrdersFragment extends Fragment {
                         public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
                             Intent intent = new Intent();
                             intent.setClass(getActivity(), MyStoreOrderSummary.class);
+                            intent.putExtra("order",ordersList.get(index));
                             startActivity(intent);
                         }
                     });

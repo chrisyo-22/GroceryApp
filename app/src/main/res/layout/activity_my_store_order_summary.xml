@@ -7,7 +7,7 @@
     tools:context=".MyStoreOrderSummary">
 
     <TextView
-        android:id="@+id/orderSummary"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="189dp"
@@ -24,33 +24,31 @@
         app:layout_constraintVertical_bias="0.061" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/complete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="303dp"
-        android:layout_marginBottom="293dp"
-        android:text="Button"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="58dp"
+        android:text="Complete"
+        app:backgroundTint="#8BC34A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderSummary"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/OrderSummaryList" />
 
-
-    <!--    <ListView-->
-<!--        android:id="@+id/OrderSummaryList"-->
-<!--        android:layout_width="409dp"-->
-<!--        android:layout_height="642dp"-->
-<!--        android:layout_marginStart="1dp"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        android:layout_marginEnd="1dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
-
-
+    <ListView
+        android:id="@+id/OrderSummaryList"
+        android:layout_width="407dp"
+        android:layout_height="463dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/complete_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
