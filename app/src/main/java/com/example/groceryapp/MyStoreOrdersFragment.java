@@ -1,5 +1,6 @@
 package com.example.groceryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
@@ -122,11 +124,11 @@ public class MyStoreOrdersFragment extends Fragment {
                                     String user_id = snapshot.getValue().toString();
                                     String order_id = snapshot.getKey();
                                     DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(user_id);
+
                                     reference_2.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             ordersList.add(snapshot.child("name").getValue().toString());
-                                            Log.i("demo", "hey "+ordersList);
                                             listViewAdapter.notifyDataSetChanged();
                                         }
 
@@ -137,7 +139,6 @@ public class MyStoreOrdersFragment extends Fragment {
                                     });
 
                                 }
-                                Log.i("demo", "hello "+ordersList);
 
                             }
 
@@ -146,6 +147,15 @@ public class MyStoreOrdersFragment extends Fragment {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    });
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(), MyStoreOrderSummary.class);
+                            startActivity(intent);
                         }
                     });
                 }

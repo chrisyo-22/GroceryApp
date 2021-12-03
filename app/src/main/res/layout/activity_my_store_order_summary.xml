@@ -7,7 +7,7 @@
     tools:context=".MyStoreOrderSummary">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/orderSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="189dp"
@@ -23,29 +23,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.061" />
 
-
-    <ListView
-        android:id="@+id/OrderSummaryList"
-        android:layout_width="409dp"
-        android:layout_height="642dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="303dp"
+        android:layout_marginBottom="293dp"
         android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/orderSummary"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <!--    <ListView-->
+<!--        android:id="@+id/OrderSummaryList"-->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="642dp"-->
+<!--        android:layout_marginStart="1dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginEnd="1dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
