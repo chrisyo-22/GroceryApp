@@ -136,7 +136,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                 ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child(DBConstants.ORDER_PROCESS).setValue(true);
                 ref.getReference(DBConstants.STORES_PATH).child(order_store_id).child(DBConstants.STORE_ORDERS).child(order_id).setValue(current_user_id);
                 //wanna start activity here to refresh the page.
-
+                v.getContext().startActivity(new Intent(v.getContext(),CartActivity.class));
                 Toast.makeText(v.getContext(),"Order has been sent!", Toast.LENGTH_SHORT).show();
             }
         });
