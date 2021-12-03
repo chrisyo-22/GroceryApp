@@ -18,10 +18,10 @@
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop.xml" value="0.371875" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/activity_shop_product.xml" value="0.371875" />
         <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/fragment_my_store_products.xml" value="0.371875" />
+        <entry key="..\:/Users/antfs/AndroidStudioProjects/B07FinalProject/app/src/main/res/layout/sample_order_product.xml" value="0.371875" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_create_store.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_my_store.xml" value="0.10364583333333334" />
-        <entry key="app/src/main/res/layout/activity_my_store_order_summary.xml" value="0.24728910896079434" />
         <entry key="app/src/main/res/layout/activity_shop.xml" value="0.22310460300563362" />
         <entry key="app/src/main/res/layout/activity_shop_product.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_my_store_products.xml" value="0.22037037037037038" />
@@ -38,7 +38,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.335" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>

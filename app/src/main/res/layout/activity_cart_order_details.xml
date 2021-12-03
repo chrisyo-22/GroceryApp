@@ -124,15 +124,12 @@
         android:id="@+id/detail_Total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Order_product_detail_view"
-        app:layout_constraintVertical_bias="0.541" />
+        app:layout_constraintTop_toBottomOf="@+id/Order_product_detail_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
