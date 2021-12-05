@@ -40,7 +40,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     private int total;
     private TextView display_total;
     private Button sent_order;
-    private ArrayList<String> product_id_inOrder;
+    private HashMap<Integer,String> position_to_product_id;
 
 
     public OrderProductAdapter(ArrayList<HashMap<String, Integer>> productList, String order_id, TextView display_total, Button sent_order){
@@ -64,7 +64,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
             product_brand = view.findViewById(R.id.oproduct_brand);
             product_price = view.findViewById(R.id.oproduct_price);
             edit_quantity = view.findViewById(R.id.oproduct_quantity);
-            product_id_inOrder = new ArrayList<String>();
+            position_to_product_id = new HashMap<Integer,String>();
             //display_total = view.findViewById(R.id.edit_Total);
 //            //define image action btn
             //order_Comfirm_btn = view.findViewById(R.id.order_Comfirm);
@@ -97,11 +97,12 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                             for (DataSnapshot each_product : snapshot.getChildren()) {
                                 Product each_pro = each_product.getValue(Product.class);
                                 each_pro.setId(each_product.getKey());
-                                product_id_inOrder.add(each_product.getKey());
+
+                                //Log.i("demo","Adapter Position: "+holder.getAdapterPosition()+ " Product name is: "+ each_pro.getName());
                                 //Log.i("demo","hey "+each_pro.getId());
                                 for (HashMap.Entry<String, Integer> entry : productList.get(holder.getAdapterPosition()).entrySet()) {
                                     if (entry.getKey().equals(each_pro.getId())) {
-
+                                        position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
                                         holder.product_name.setText(each_pro.getName());
                                         holder.product_brand.setText(each_pro.getBrand());
                                         holder.product_price.setText(each_pro.getPriceAsString(true));
@@ -137,15 +138,37 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                 Toast.makeText(v.getContext(), "Order has been sent!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
         //user update quantity:
         holder.edit_quantity.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                 String quantity_num=holder.edit_quantity.getText().toString();
                 if(keyCode == KeyEvent.KEYCODE_ENTER){
                     if(Integer.parseInt(quantity_num)>=1){
-                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(product_id_inOrder.get(holder.getAdapterPosition())).setValue(Integer.parseInt(quantity_num));
+                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(position_to_product_id.get(holder.getAdapterPosition())).setValue(Integer.parseInt(quantity_num));
+                        Toast.makeText(v.getContext(), "product quantity updated!", Toast.LENGTH_SHORT).show();
                     }
+                    else{
+                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(position_to_product_id.get(holder.getAdapterPosition())).removeValue();
+                        Toast.makeText(v.getContext(), "product DELETED!", Toast.LENGTH_SHORT).show();
+                    }
+                    ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(!snapshot.child("items_ids").exists()){
+                                ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).removeValue();
+                                Toast.makeText(v.getContext(), "Order Deleted!!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
                 return false;
             }
@@ -153,66 +176,9 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
 
 
-
-//        holder.edit_quantity.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            //no operations
-//            }
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            //no operations
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//                edit_quantity_helper(holder, ref);
-//
-//            }
-//        });
-//        holder.edit_quantity.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if(keyCode == KeyEvent.KEYCODE_ENTER){
-//                    if(Integer.parseInt(holder.edit_quantity.getText().toString())>=1){
-//                        int new_quantity = Integer.parseInt(holder.edit_quantity.getText().toString());
-//                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(product_id).setValue(new_quantity);
-//                    }
-//
-//                }
-//                return true;
-//            }
-//
-//        });
-
-
-
-    }
-    public ArrayList<String> reverse(ArrayList<String> list) {
-        if(list.size() > 1) {
-            String value = list.remove(0);
-            reverse(list);
-            list.add(value);
-        }
-        return list;
     }
 
-    private void  edit_quantity_helper(@NonNull OrderProductAdapter.MyViewHolder holder,FirebaseDatabase ref){
-        String quantity_num=holder.edit_quantity.getText().toString();
 
-        holder.edit_quantity.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == KeyEvent.KEYCODE_ENTER){
-                    if(Integer.parseInt(quantity_num)>=1){
-                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(product_id_inOrder.get(holder.getAdapterPosition())).setValue(Integer.parseInt(quantity_num));
-                    }
-                }
-                return false;
-            }
-        });
-    }
 
     @Override
     public int getItemCount() {
