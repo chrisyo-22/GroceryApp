@@ -32,7 +32,7 @@ public class DBConstants {
 
     public static final String NULL = "null";
 
-    //public static final DateFormat dateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+    public static final DateFormat dateFormat = new SimpleDateFormat("HH:mm dd/MM/yyyy");
 
     public static String restrictNameLength(String name) {
         if(name == null) return NULL;
