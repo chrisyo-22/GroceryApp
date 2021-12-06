@@ -1,0 +1,49 @@
+Name: Chris Yo
+
+What have you done since yesterday?
+- Order displaying and editing
+- Bug fixes
+
+What are you planning on doing today?
+
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Antonio Ferreras
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- Improve my account page GUI
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Yinglong Huang
+
+What have you done since yesterday?
+
+
+What are you planning on doing today?
+- Owner mark order as completed
+
+Any impediments or stumbling blocks?
+
+
+===========================
+
+Name: Jingyu
+
+What have you done since yesterday?
+- Order displaying and editing
+
+What are you planning on doing today?
+- Testing
+
+Any impediments or stumbling blocks?
