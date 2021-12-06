@@ -37,7 +37,6 @@ public class GeneralPage extends AppCompatActivity {
         // Get database and user data
         ref = FirebaseDatabase.getInstance().getReference();
         current_user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         ref.child(DBConstants.USERS_PATH).child(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
