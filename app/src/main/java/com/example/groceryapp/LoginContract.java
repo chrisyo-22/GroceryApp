@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface LoginContract {
     public interface Model{
 
-        void connectFirebaseLogin(String email, String password);
+        void connectFirebaseLogin(String email, String password, LoginListener my_listener);
     }
 
     public interface View{
