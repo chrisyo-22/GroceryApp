@@ -5,7 +5,7 @@
     android:id="@+id/newconstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="#EDEDED"
     tools:context=".MainActivity">
 
 
@@ -17,7 +17,6 @@
         android:gravity="center"
         android:text="Login"
         android:textAlignment="center"
-        android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,13 +28,11 @@
         android:layout_width="363dp"
         android:layout_height="60dp"
         android:layout_marginTop="54dp"
-        android:background="#30ffffff"
+        android:background="#BFFFFFFF"
         android:drawableLeft="@drawable/person_icon"
         android:drawablePadding="20dp"
         android:hint="Email"
         android:padding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin" />
@@ -46,13 +43,11 @@
         android:layout_width="363dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:background="#30ffffff"
+        android:background="#BFFFFFFF"
         android:drawablePadding="20dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_username" />
@@ -63,6 +58,8 @@
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
         android:text="Sign In"
+        android:textSize="16sp"
+        app:backgroundTint="@color/app_violet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_password" />
@@ -72,16 +69,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="72dp"
-        android:background="@color/teal_700"
+        android:layout_marginTop="45dp"
+        android:background="#00FFFFFF"
         android:hapticFeedbackEnabled="false"
-        android:text="Haven't got an Account? Click Here to SIGN UP!"
-        android:textColor="#04464E"
-        android:textSize="16sp"
+        android:text="Click here to create an account"
+        android:textAlignment="center"
+        android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_button"
+        tools:ignore="TextContrastCheck"
         tools:visibility="visible" />
 
 

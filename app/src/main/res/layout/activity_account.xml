@@ -121,6 +121,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="#2C5161"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".General_page">
 
         <androidx.appcompat.widget.Toolbar
