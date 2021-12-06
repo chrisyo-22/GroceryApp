@@ -12,21 +12,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 public class LoginModel implements LoginContract.Model{
-    ArrayList<Store> all_stores;
-    String user_Name;
-    String user_Email;
-    String user_store_id;
-    Store user_store;
 
-    private LoginContract.LoginListener login_Listener;
 
-    public LoginModel(LoginContract.LoginListener login_Listener){
-        this.login_Listener = login_Listener;
+    public LoginModel(){
+
     }
 
 
     @Override
-    public void connectFirebaseLogin(String email, String password) {
+    public void connectFirebaseLogin(String email, String password, LoginContract.LoginListener login_Listener) {
         FirebaseAuth f_auth = FirebaseAuth.getInstance();
         f_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
