@@ -24,8 +24,8 @@ public class LoginPresenterTest {
 
         LoginPresenter presenter = new LoginPresenter(view,model);
 
-        //presenter.onHandleLogin(email,password);
-        //verify(model).connectFirebaseLogin(email,password,presenter);
+        presenter.onHandleLogin(email,password);
+        verify(model).connectFirebaseLogin(email,password,presenter);
         presenter.onSuccess();
         verify(view).viewLoginSuccess();
         presenter.onFailure("failed");
