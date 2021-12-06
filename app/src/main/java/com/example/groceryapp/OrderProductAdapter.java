@@ -91,38 +91,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                 if (task.isSuccessful()) {
                     order_store_id = task.getResult().getValue(String.class);
                     //
-                    ref.getReference(DBConstants.STORES_PATH).child(order_store_id).child(DBConstants.STORE_PRODUCTS).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot each_product : snapshot.getChildren()) {
-                                Product each_pro = each_product.getValue(Product.class);
-                                each_pro.setId(each_product.getKey());
-
-                                //Log.i("demo","Adapter Position: "+holder.getAdapterPosition()+ " Product name is: "+ each_pro.getName());
-                                //Log.i("demo","hey "+each_pro.getId());
-                                for (HashMap.Entry<String, Integer> entry : productList.get(holder.getAdapterPosition()).entrySet()) {
-                                    if (entry.getKey().equals(each_pro.getId())) {
-                                        position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
-                                        holder.product_name.setText(each_pro.getName());
-                                        holder.product_brand.setText(each_pro.getBrand());
-                                        holder.product_price.setText(each_pro.getPriceAsString(true));
-                                        holder.edit_quantity.setText(entry.getValue().toString());
-                                        total += entry.getValue() * each_pro.getPrice();
-                                        Log.i("demo", "hey " + DBConstants.getPriceAsString(total));
-                                        display_total.setText("Total: " + DBConstants.getPriceAsString(total));
-
-                                    }
-                                    //entry.getValue());
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                   update_total(ref,holder,true);
                 }
 
             }
@@ -155,6 +124,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                         ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(position_to_product_id.get(holder.getAdapterPosition())).removeValue();
                         Toast.makeText(v.getContext(), "product DELETED!", Toast.LENGTH_SHORT).show();
                     }
+                    update_total(ref,holder,false);
                     ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -178,6 +148,42 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
     }
 
+    private void update_total(FirebaseDatabase ref,OrderProductAdapter.MyViewHolder holder, boolean intialize_field) {
+        total = 0;
+
+        ref.getReference(DBConstants.STORES_PATH).child(order_store_id).child(DBConstants.STORE_PRODUCTS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot each_product : snapshot.getChildren()) {
+                    Product each_pro = each_product.getValue(Product.class);
+                    each_pro.setId(each_product.getKey());
+                    //Log.i("demo","Adapter Position: "+holder.getAdapterPosition()+ " Product name is: "+ each_pro.getName());
+                    //Log.i("demo","hey "+each_pro.getId());
+                    for (HashMap.Entry<String, Integer> entry : productList.get(holder.getAdapterPosition()).entrySet()) {
+                        if (entry.getKey().equals(each_pro.getId())) {
+                            position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
+                            holder.product_name.setText(each_pro.getName());
+                            holder.product_brand.setText(each_pro.getBrand());
+                            holder.product_price.setText(each_pro.getPriceAsString(true));
+                            if(intialize_field){
+                                holder.edit_quantity.setText(entry.getValue().toString());
+                            }
+                            total += entry.getValue() * each_pro.getPrice();
+                            Log.i("demo", "hey " + DBConstants.getPriceAsString(total));
+                        }
+                        //entry.getValue());
+                    }
+                }
+                display_total.setText("Total: " + DBConstants.getPriceAsString(total));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
     @Override
