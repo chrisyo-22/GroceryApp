@@ -79,7 +79,7 @@ public class ShopActivity extends GeneralPage {
                     stores_to_display.add(single_store);
                    // Log.i("demo", store.getName());
                 }
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override
