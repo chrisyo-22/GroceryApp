@@ -17,7 +17,7 @@ public class LoginPresenterTest {
     LoginModel model;
 
     @Test
-    public void testonHandleLogin() {
+    public void test_onHandleLogin() {
         String email = "testing@gmail.com";
         String password = "test123";
         LoginPresenter presenter = new LoginPresenter(view,model);
