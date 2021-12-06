@@ -56,7 +56,6 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
        final EditText edit_quantity;
 
 
-
         public MyViewHolder(final View view){
             super(view);
             product_name = view.findViewById(R.id.oproduct_name);

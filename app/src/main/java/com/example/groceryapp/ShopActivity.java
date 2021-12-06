@@ -60,7 +60,7 @@ public class ShopActivity extends GeneralPage {
                     Store store = EachStore.getValue(Store.class);
                     store.setId(EachStore.getKey());
                     //add products into the store
-                    //the products node within each store object in firebase is a map of products
+                    //the products node within each store object in firebase is a HashMap of products
                     //and not a list of products, so add each into the product list using a for loop
                     DataSnapshot Products = EachStore.child(DBConstants.STORE_PRODUCTS);
                     for (DataSnapshot EachProduct : Products.getChildren()){

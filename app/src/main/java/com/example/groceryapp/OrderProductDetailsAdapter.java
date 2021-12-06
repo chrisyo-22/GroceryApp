@@ -47,9 +47,6 @@ public class OrderProductDetailsAdapter extends RecyclerView.Adapter<OrderProduc
             product_brand = view.findViewById(R.id.dproduct_brand);
             product_price = view.findViewById(R.id.dproduct_price);
             quantity = view.findViewById(R.id.dproduct_quantity);
-
-
-
         }
     }
     @NonNull

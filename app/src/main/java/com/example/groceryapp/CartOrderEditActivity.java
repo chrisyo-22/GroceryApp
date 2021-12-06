@@ -53,7 +53,6 @@ public class CartOrderEditActivity extends GeneralPage {
         //
         //store store_id:
         order_id = order.getId();
-
         setProductInfo(order);
 
     }
@@ -65,6 +64,7 @@ public class CartOrderEditActivity extends GeneralPage {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
     }
+
 
     private void setProductInfo(Order order) {
         product_id_list = order.getItems_ids();
@@ -88,7 +88,6 @@ public class CartOrderEditActivity extends GeneralPage {
                     //Log.i("demo","Stuck here"+product_list);
                 }
                 setAdapter();
-
             }
 
             @Override

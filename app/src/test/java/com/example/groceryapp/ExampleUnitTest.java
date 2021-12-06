@@ -24,8 +24,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleUnitTest {
 
-
-
     @Test
     public void testPresenter(){
         /*** stubbing ***/
