@@ -34,9 +34,6 @@ public class MyStoreOrderSummary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_store_order_summary);
 
@@ -78,12 +75,8 @@ public class MyStoreOrderSummary extends AppCompatActivity {
                                     reference_2.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-
-
-
                                                 orderSummaryList.add(dataSnapshot2.getKey());
                                                 listViewAdapter.notifyDataSetChanged();
-
                                         }
 
                                         @Override

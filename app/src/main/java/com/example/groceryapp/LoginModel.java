@@ -20,19 +20,19 @@ public class LoginModel implements LoginContract.Model{
 
 
     @Override
-    public void connectFirebaseLogin(String email, String password, LoginContract.LoginListener login_Listener) {
+    public void connectFirebaseLogin(String email, String password, LoginPresenter presenter) {
         FirebaseAuth f_auth = FirebaseAuth.getInstance();
         f_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    login_Listener.onSuccess();
+                    presenter.onSuccess();
                     //Toast.makeText(activity,"Login successful", Toast.LENGTH_SHORT).show();
                    // startActivity(new Intent(getApplicationContext(), ShopActivity.class));
                 }
                 else{
                     //Toast.makeText(Login.this, "Error! "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                    login_Listener.onFailure(task.getException().getMessage());
+                    presenter.onFailure(task.getException().getMessage());
                 }
             }
         });
