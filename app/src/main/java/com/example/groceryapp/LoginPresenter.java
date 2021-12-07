@@ -18,11 +18,11 @@ public class LoginPresenter implements LoginContract.Presenter{
         login_Model.connectFirebaseLogin(email,password,this);
     }
 
-
+    @Override
     public void onSuccess() {
         login_View.viewLoginSuccess();
     }
-
+    @Override
     public void onFailure(String message) {
         login_View.viewLoginFailed(message);
     }
