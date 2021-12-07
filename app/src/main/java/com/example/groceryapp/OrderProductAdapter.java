@@ -37,6 +37,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     private String current_user_id;
     private String order_store_id;
     private String product_id;
+    private int total;
     private TextView display_total;
     private Button sent_order;
     private HashMap<Integer,String> position_to_product_id;
@@ -54,6 +55,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         private TextView product_name, product_price,product_brand;
        // private ImageView order_Comfirm_btn;
        final EditText edit_quantity;
+
 
 
         public MyViewHolder(final View view){
@@ -89,7 +91,38 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                 if (task.isSuccessful()) {
                     order_store_id = task.getResult().getValue(String.class);
                     //
-                   update_total(ref,holder,true);
+                    ref.getReference(DBConstants.STORES_PATH).child(order_store_id).child(DBConstants.STORE_PRODUCTS).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot each_product : snapshot.getChildren()) {
+                                Product each_pro = each_product.getValue(Product.class);
+                                each_pro.setId(each_product.getKey());
+
+                                //Log.i("demo","Adapter Position: "+holder.getAdapterPosition()+ " Product name is: "+ each_pro.getName());
+                                //Log.i("demo","hey "+each_pro.getId());
+                                for (HashMap.Entry<String, Integer> entry : productList.get(holder.getAdapterPosition()).entrySet()) {
+                                    if (entry.getKey().equals(each_pro.getId())) {
+                                        position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
+                                        holder.product_name.setText(each_pro.getName());
+                                        holder.product_brand.setText(each_pro.getBrand());
+                                        holder.product_price.setText(each_pro.getPriceAsString(true));
+                                        holder.edit_quantity.setText(entry.getValue().toString());
+                                        total += entry.getValue() * each_pro.getPrice();
+                                        Log.i("demo", "hey " + DBConstants.getPriceAsString(total));
+                                        display_total.setText("Total: " + DBConstants.getPriceAsString(total));
+
+                                    }
+                                    //entry.getValue());
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
             }
@@ -115,35 +148,13 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                 String quantity_num=holder.edit_quantity.getText().toString();
                 if(keyCode == KeyEvent.KEYCODE_ENTER){
                     if(Integer.parseInt(quantity_num)>=1){
-                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS)
-                                .child(order_id).child("items_ids")
-                                .child(position_to_product_id.get(holder.getAdapterPosition()))
-                                .setValue(Integer.parseInt(quantity_num))
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) update_total(ref,holder,false);
-
-                                    }
-                                });
+                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(position_to_product_id.get(holder.getAdapterPosition())).setValue(Integer.parseInt(quantity_num));
                         Toast.makeText(v.getContext(), "product quantity updated!", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id)
-                                .child(DBConstants.USER_ORDERS)
-                                .child(order_id)
-                                .child("items_ids")
-                                .child(position_to_product_id.get(holder.getAdapterPosition()))
-                                .removeValue()
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) update_total(ref,holder,false);
-                                    }
-                                });
+                        ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).child("items_ids").child(position_to_product_id.get(holder.getAdapterPosition())).removeValue();
                         Toast.makeText(v.getContext(), "product DELETED!", Toast.LENGTH_SHORT).show();
                     }
-
                     ref.getReference(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order_id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -167,43 +178,6 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
     }
 
-    private void update_total(FirebaseDatabase ref,OrderProductAdapter.MyViewHolder holder, boolean intialize_field) {
-
-        ValueEventListener updater = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int total = 0;
-                for (DataSnapshot each_product : snapshot.getChildren()) {
-                    Product each_pro = each_product.getValue(Product.class);
-                    each_pro.setId(each_product.getKey());
-                    //Log.i("demo","Adapter Position: "+holder.getAdapterPosition()+ " Product name is: "+ each_pro.getName());
-                    //Log.i("demo","hey "+each_pro.getId());
-                    for (HashMap.Entry<String, Integer> entry : productList.get(holder.getAdapterPosition()).entrySet()) {
-                        if (entry.getKey().equals(each_pro.getId())) {
-                            position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
-                            holder.product_name.setText(each_pro.getName());
-                            holder.product_brand.setText(each_pro.getBrand());
-                            holder.product_price.setText(each_pro.getPriceAsString(true));
-                            if(intialize_field){
-                                holder.edit_quantity.setText(entry.getValue().toString());
-                            }
-                            total += entry.getValue() * each_pro.getPrice();
-
-                        }
-                        //entry.getValue());
-                    }
-                }
-                display_total.setText("Total: " + DBConstants.getPriceAsString(total));
-                Log.i("demo", "hey " + DBConstants.getPriceAsString(total));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        ref.getReference(DBConstants.STORES_PATH).child(order_store_id).child(DBConstants.STORE_PRODUCTS).addListenerForSingleValueEvent(updater);
-    }
 
 
     @Override

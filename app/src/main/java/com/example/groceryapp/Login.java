@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity implements LoginContract.View,View.
         //jump_register.setOnClickListener(this);
 
         f_auth = FirebaseAuth.getInstance();
-        login_Presenter = new LoginPresenter(this, new LoginModel());
+        login_Presenter = new LoginPresenter(this);
         //if user already login in
         if (f_auth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), ShopActivity.class));

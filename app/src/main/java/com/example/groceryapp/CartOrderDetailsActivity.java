@@ -78,6 +78,8 @@ public class CartOrderDetailsActivity extends GeneralPage {
                     //Log.i("demo","Stuck here"+product_list);
                 }
                 setAdapter();
+
+
             }
 
             @Override

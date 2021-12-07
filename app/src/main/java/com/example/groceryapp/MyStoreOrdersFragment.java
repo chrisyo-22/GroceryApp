@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -40,7 +41,7 @@ import java.util.Map;
  * Use the {@link MyStoreOrdersFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MyStoreOrdersFragment extends Fragment {
+public class MyStoreOrdersFragment extends Fragment  {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,6 +49,7 @@ public class MyStoreOrdersFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String user_store_id;
+
 
     public MyStoreOrdersFragment() {
         // Required empty public constructor
@@ -88,8 +90,9 @@ public class MyStoreOrdersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ListView listView = (ListView) view.findViewById(R.id.orders_list);
 
-        ArrayList<String> ordersList = new ArrayList<>();
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, ordersList);
+        ArrayList<String> ordersTitleList = new ArrayList<>();
+        ArrayList<HashMap<String,String>> order_to_user = new ArrayList<HashMap<String,String>>();
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, ordersTitleList);
         listView.setAdapter(listViewAdapter);
 
 
@@ -112,24 +115,34 @@ public class MyStoreOrdersFragment extends Fragment {
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ordersList.clear();
+                            ordersTitleList.clear();
                             if(!dataSnapshot.exists()){
                                 //do something here if the user have no order in his/her store
                                 Log.i("demo", "hey u have no order");
                             }
 
                             else{
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
                                     String user_id = snapshot.getValue().toString();
                                     String order_id = snapshot.getKey();
+
+                                    HashMap<String, String> user_order_ids = new HashMap<String,String>();
+                                    user_order_ids.put(order_id, user_id);
+                                    order_to_user.add(user_order_ids);
+
+
                                     DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(user_id);
 
                                     reference_2.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            ordersList.add(snapshot.child("name").getValue().toString());
-                                            listViewAdapter.notifyDataSetChanged();
+                                            String state = snapshot.child(DBConstants.STORE_ORDERS).child(order_id).child(DBConstants.ORDER_COMPLETE).getValue().toString();
+
+                                            if(state.equals("false")){
+                                            ordersTitleList.add(snapshot.child("name").getValue().toString() + "  " + order_id);
+                                            listViewAdapter.notifyDataSetChanged();}
+
                                         }
 
                                         @Override
@@ -155,7 +168,9 @@ public class MyStoreOrdersFragment extends Fragment {
                         public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
                             Intent intent = new Intent();
                             intent.setClass(getActivity(), MyStoreOrderSummary.class);
-                            intent.putExtra("order",ordersList.get(index));
+
+                            intent.putExtra("order_to_user",  order_to_user.get(index));
+
                             startActivity(intent);
                         }
                     });
