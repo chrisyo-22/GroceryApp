@@ -1,16 +1,23 @@
 package com.example.groceryapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,11 +30,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyStoreOrderSummary extends AppCompatActivity {
-    private String user_store_id;
-    int selectedItem = -1;
 
+    String order_id;
+    String order_user_id;
+
+
+    ArrayList<String> orderSummaryList;
+    ArrayAdapter<String> listViewAdapter;
+    TextView display_total;
+    float totalPrice;
 
 
 
@@ -35,110 +49,110 @@ public class MyStoreOrderSummary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        Intent intent = this.getIntent();
+        //get the order information
+
+        HashMap<String, String> order_to_user = (HashMap<String, String>) intent.getSerializableExtra("order_to_user");
         setContentView(R.layout.activity_my_store_order_summary);
 
+        display_total = findViewById(R.id.total_price);
+
+
         ListView listView = (ListView) findViewById(R.id.OrderSummaryList);
-        ArrayList<String> orderSummaryList = new ArrayList<>();
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(MyStoreOrderSummary.this, android.R.layout.simple_list_item_1, orderSummaryList);
+        orderSummaryList = new ArrayList<>();
+        listViewAdapter = new ArrayAdapter<String>(MyStoreOrderSummary.this, android.R.layout.simple_list_item_1, orderSummaryList);
         listView.setAdapter(listViewAdapter);
 
-        //get the user_id, and then use it to get the store orders:
-        FirebaseDatabase f_auth = FirebaseDatabase.getInstance();
-        FirebaseUser f_user = FirebaseAuth.getInstance().getCurrentUser();
-        String UID = f_user.getUid();
-        f_auth.getReference("Users").child(UID).child("owned_store_id").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        for (HashMap.Entry<String, String> entry : order_to_user.entrySet()) {
+            order_id = entry.getKey();
+            order_user_id = entry.getValue();
+        }
+        displayOrderDetails();
+
+
+    }
+
+    private void displayOrderDetails() {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(order_user_id).child("orders").child(order_id);
+        ValueEventListener listener = new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("demo", "Error getting data", task.getException());
-                } else {
-                    user_store_id = task.getResult().getValue().toString();
-                    //Log.i("demo","my userid is "+user_store_id);
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH).child(user_store_id).child(DBConstants.STORE_ORDERS);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            orderSummaryList.clear();
-                            if (!dataSnapshot.exists()) {
-                                //do something here if the user have no order in his/her store
-                                Log.i("demo", "hey u have no order");
-                            } else {
-
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                                    String user_id = snapshot.getValue().toString();
-                                    String order_id = snapshot.getKey();
-
-                                    DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(user_id).child("orders").child(order_id);
-
-                                    reference_2.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-                                                orderSummaryList.add(dataSnapshot2.getKey());
-                                                listViewAdapter.notifyDataSetChanged();
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
+                String store_id = dataSnapshot.child("order_store_id").getValue().toString();
+                String state = dataSnapshot.child(DBConstants.ORDER_COMPLETE).getValue().toString();
 
 
+                    for (DataSnapshot snapshot : dataSnapshot.child("items_ids").getChildren()) {
 
-                                }
+                        String product_id = snapshot.getKey();
+                        String product_quantity = snapshot.getValue().toString();
+
+                        DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.STORES_PATH).child(store_id).child("products").child(product_id);
+
+                        reference_2.addValueEventListener(new ValueEventListener() {
+
+
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot2) {
+//                            Log.i("demo","my price is ");
+
+                                float price = Float.parseFloat(snapshot2.child("price").getValue().toString()) / 100;
+
+                                orderSummaryList.add(snapshot2.child("name").getValue().toString() + "    " + "$" + price + "    " + product_quantity);
+
+                                totalPrice += price * Integer.parseInt(product_quantity);
+//                            Log.i("demo","my first price is "+ totalPrice);
+
+
+                                listViewAdapter.notifyDataSetChanged();
+                                display_total.setText("Total: $" + totalPrice);
 
                             }
 
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
 
-                }
+                    }
+//                Log.i("demo","my price is "+ totalPrice);
+
+
+
             }
-        });
-        //Log.i("demo","my new user is "+user_store_id);
-        Button removeProductButton = findViewById(R.id.complete_button);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        };
 
-        removeProductButton.setOnClickListener(new View.OnClickListener() {
+        reference.addValueEventListener(listener);
+
+        FirebaseDatabase ref = FirebaseDatabase.getInstance();
+        Button complete_button = findViewById(R.id.complete_button);
+        complete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedItem != -1)
-                    displayDeleteDialog();
+                ref.getReference(DBConstants.USERS_PATH).child(order_user_id).child(DBConstants.USER_ORDERS).child(order_id).child(DBConstants.ORDER_COMPLETE).setValue(true);
+
+                //wanna start activity here to refresh the page.
+
+                Intent specPage= new Intent(v.getContext(), MyStoreActivity.class);
+                v.getContext().startActivity(specPage);
+
+//                Fragment fragment2 = new MyStoreOrdersFragment();
+//                FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment2);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+
+                Toast.makeText(v.getContext(), "Order has been completed!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    private void displayDeleteDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MyStoreOrderSummary.this);
-        builder.setCancelable(true);
-        builder.setTitle("Confirm");
-        builder.setMessage("Are you sure you want to delete this item?");
-        builder.setPositiveButton(android.R.string.yes,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-//                        ref_to_store_products.child(product_list_ids.get(selectedItem)).removeValue();
-//                        product_list_ids.remove(selectedItem);
-//                        product_list.remove(selectedItem);
-                        selectedItem--;
-                    }
-                });
-        builder.setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }

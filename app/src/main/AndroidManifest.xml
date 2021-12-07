@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryApp">
         <activity
+            android:name=".MystoreOrderSummaryHistory"
+            android:exported="false" />
+        <activity
             android:name=".CartOrderEditActivity"
             android:exported="false" />
         <activity

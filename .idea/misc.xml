@@ -25,8 +25,12 @@
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_create_store.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_my_store.xml" value="0.10364583333333334" />
+        <entry key="app/src/main/res/layout/activity_my_store_order_summary.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_mystore_order_summary_history.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/activity_shop.xml" value="0.22310460300563362" />
         <entry key="app/src/main/res/layout/activity_shop_product.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_my_store_history.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_my_store_orders.xml" value="0.2898148148148148" />
         <entry key="app/src/main/res/layout/fragment_my_store_products.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/layout/sample_product.xml" value="0.3723904432578698" />
       </map>
