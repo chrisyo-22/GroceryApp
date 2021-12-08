@@ -99,6 +99,7 @@ public class Login extends AppCompatActivity implements LoginContract.View,View.
         login_Presenter.onHandleLogin(email,password);
     }
 
+
     @Override
     public void viewLoginSuccess() {
         Toast.makeText(getApplicationContext(),"Login successful", Toast.LENGTH_SHORT).show();

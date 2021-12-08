@@ -11,6 +11,8 @@ import android.widget.SimpleAdapter;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,7 @@ public class ShopActivity extends GeneralPage {
     private ListView stores_lv;
     List<Map<String, String>> stores_to_display;
     ArrayList<Store> store_list;
+
 
 
     @Override
@@ -103,6 +106,7 @@ public class ShopActivity extends GeneralPage {
             }
         });
     }
+
 
 
 
