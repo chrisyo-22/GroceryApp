@@ -190,7 +190,7 @@ public class CartActivity extends GeneralPage {
                             cart_info_list.clear();
                             updateCartList(tabPos);
 
-                            if(order.isIs_processing() == false && order.isIs_complete() == true){
+                            if(order.isIs_processing() == true && order.isIs_complete() == true){
                                 order_list.add(order);
 
                                 Map<String, String> single_order = new HashMap<String, String>(2);

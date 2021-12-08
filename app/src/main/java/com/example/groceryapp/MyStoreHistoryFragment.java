@@ -133,7 +133,8 @@ public class MyStoreHistoryFragment extends Fragment {
 
                                             if(state.equals("true")){
                                                 ordersTitleList.add(snapshot.child("name").getValue().toString());
-                                                listViewAdapter.notifyDataSetChanged();}
+                                                listViewAdapter.notifyDataSetChanged();
+                                            }
 
                                         }
 
