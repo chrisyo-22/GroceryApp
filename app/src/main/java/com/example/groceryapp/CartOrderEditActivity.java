@@ -76,17 +76,20 @@ public class CartOrderEditActivity extends GeneralPage {
                 for(DataSnapshot each_product: snapshot.getChildren()){
                     existing_product_id.add(each_product.getKey());
                 }
-                for(HashMap.Entry<String,Integer> entry:product_id_list.entrySet()){
-                    HashMap<String,Integer> new_hashmap_product = new HashMap<String,Integer>();
+                if (product_id_list != null) {
+                    for(HashMap.Entry<String,Integer> entry:product_id_list.entrySet()){
+                        HashMap<String,Integer> new_hashmap_product = new HashMap<String,Integer>();
 
-                    if(existing_product_id.contains(entry.getKey())){
-                       // Log.i("demo", "hello "+existing_product_id);
-                        new_hashmap_product.put(entry.getKey(),entry.getValue());
-                        product_list.add(new_hashmap_product);
-                        //Log.i("demo", "hello "+product_list);
+                        if(existing_product_id.contains(entry.getKey())){
+                            // Log.i("demo", "hello "+existing_product_id);
+                            new_hashmap_product.put(entry.getKey(),entry.getValue());
+                            product_list.add(new_hashmap_product);
+                            //Log.i("demo", "hello "+product_list);
+                        }
+                        //Log.i("demo","Stuck here"+product_list);
                     }
-                    //Log.i("demo","Stuck here"+product_list);
                 }
+
                 setAdapter();
 
             }

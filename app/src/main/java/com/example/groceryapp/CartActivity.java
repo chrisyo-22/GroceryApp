@@ -114,6 +114,7 @@ public class CartActivity extends GeneralPage {
 
                                 if(!snapshot.child("items_ids").exists()){
                                     ref.child(DBConstants.USERS_PATH).child(current_user_id).child(DBConstants.USER_ORDERS).child(order.getId()).removeValue();
+                                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                                 }
                             }
                             @Override

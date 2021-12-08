@@ -21,54 +21,62 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 
 public class AccountActivity extends GeneralPage {
     Button logout_btn,reset_psw_btn;
-    TextView email_tag,owned_store_tag;
+    TextView email_tag,owned_store_tag,creation_date_tag;
     EditText name_tag;
     public static final String EXTRA_USER_NAME = "com.example.groceryapp.USER_NAME";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializePage(R.layout.activity_account);
+    }
+
+    public void reset_psw_btn(){
+        //String current_user_id = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email_tag.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(AccountActivity.this, "Reset Password Request Sent!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void initializeOther() {
         email_tag = findViewById(R.id.email_tag);
         owned_store_tag = findViewById(R.id.owner_store_tag);
         name_tag = findViewById(R.id.name_tag);
         reset_psw_btn = findViewById(R.id.change_pswd_btn);
+        creation_date_tag = findViewById(R.id.creation_date_view);
 
+        email_tag.setText(current_user.getEmail());
+        name_tag.setText(current_user.getName());
+        long timestamp = FirebaseAuth.getInstance().getCurrentUser().getMetadata().getCreationTimestamp();
+        Timestamp ts = new Timestamp(timestamp);
 
+        creation_date_tag.setText(DBConstants.dateFormat.format(ts));//ts.toString()
 
-
-        ref.child(DBConstants.USERS_PATH).child(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        ref.child(DBConstants.STORES_PATH).child(current_user.getOwned_store_id()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(!task.isSuccessful()) {
-                    Log.e("GroceryApp", "Error getting user data", task.getException());
-                } else {
-                    User current_user = task.getResult().getValue(User.class);
-                    email_tag.setText(current_user.getEmail());
-                    name_tag.setText(current_user.getName());
+                if(task.isSuccessful()) {
+                    Store owner_store = task.getResult().getValue(Store.class);
+                    if(owner_store != null)
+                        owned_store_tag.setText(owner_store.getName());
+                    else
+                        owned_store_tag.setText("N/a");
 
-                    ref.child(DBConstants.STORES_PATH).child(current_user.getOwned_store_id()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if(task.isSuccessful()) {
-                                Store owner_store = task.getResult().getValue(Store.class);
-                                if(owner_store != null)
-                                    owned_store_tag.setText(owner_store.getName());
-                                else
-                                    owned_store_tag.setText("N/a");
-
-                            }
-                            else{
-                                Log.e("GroceryApp", "Error getting user data", task.getException());
-                            }
-
-                        }
-                    });
                 }
+                else{
+                    Log.e("GroceryApp", "Error getting user data", task.getException());
+                }
+
             }
         });
+
 //
 //        TextWatcher inputTextWatcher = new TextWatcher() {
 //            public void afterTextChanged(Editable s) {
@@ -102,20 +110,6 @@ public class AccountActivity extends GeneralPage {
             }
         });
 
-
-    }
-    public void reset_psw_btn(){
-        //String current_user_id = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseAuth.getInstance().sendPasswordResetEmail(email_tag.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(AccountActivity.this, "Reset Password Request Sent!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public void initializeOther() {
         logout_btn = findViewById(R.id.sign_out_btn);
 
         logout_btn.setOnClickListener(new View.OnClickListener() {
