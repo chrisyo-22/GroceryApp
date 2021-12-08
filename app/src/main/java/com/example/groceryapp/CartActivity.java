@@ -89,6 +89,7 @@ public class CartActivity extends GeneralPage {
                                     for(DataSnapshot each_product: snapshot.getChildren()){
                                         existing_product_id.add(each_product.getKey());
                                     }
+                                    if(order.getItems_ids() == null) return;
                                     //loop through order and then check if it exists in the store products.
                                     for(HashMap.Entry<String,Integer> entry:order.getItems_ids().entrySet()) {
                                         Log.i("demo","You are cart "+existing_product_id );
@@ -190,7 +191,7 @@ public class CartActivity extends GeneralPage {
                             cart_info_list.clear();
                             updateCartList(tabPos);
 
-                            if(order.isIs_processing() == true && order.isIs_complete() == true){
+                            if(order.isIs_processing() && order.isIs_complete()){
                                 order_list.add(order);
 
                                 Map<String, String> single_order = new HashMap<String, String>(2);

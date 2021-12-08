@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MystoreOrderSummaryHistory extends AppCompatActivity {
+public class MystoreOrderSummaryHistory extends GeneralPage {
 
     String order_id;
     String order_user_id;
@@ -32,11 +32,18 @@ public class MystoreOrderSummaryHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        initializePage(R.layout.activity_mystore_order_summary_history);
+
+
+
+    }
+
+    @Override
+    public void initializeOther() {
         Intent intent = this.getIntent();
         //get the order information
 
         HashMap<String, String> order_to_user = (HashMap<String, String>) intent.getSerializableExtra("order_to_user");
-        setContentView(R.layout.activity_mystore_order_summary_history);
 
         display_total = findViewById(R.id.total_price);
 
@@ -51,8 +58,6 @@ public class MystoreOrderSummaryHistory extends AppCompatActivity {
             order_user_id = entry.getValue();
         }
         displayOrderDetails();
-
-
     }
 
     private void displayOrderDetails() {

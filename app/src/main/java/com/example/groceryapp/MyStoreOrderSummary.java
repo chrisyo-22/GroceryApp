@@ -32,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MyStoreOrderSummary extends AppCompatActivity {
+public class MyStoreOrderSummary extends GeneralPage {
 
     String order_id;
     String order_user_id;
@@ -49,11 +49,18 @@ public class MyStoreOrderSummary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        initializePage(R.layout.activity_my_store_order_summary);
+
+
+
+    }
+
+    @Override
+    public void initializeOther() {
         Intent intent = this.getIntent();
         //get the order information
 
         HashMap<String, String> order_to_user = (HashMap<String, String>) intent.getSerializableExtra("order_to_user");
-        setContentView(R.layout.activity_my_store_order_summary);
 
         display_total = findViewById(R.id.total_price);
 
@@ -68,8 +75,6 @@ public class MyStoreOrderSummary extends AppCompatActivity {
             order_user_id = entry.getValue();
         }
         displayOrderDetails();
-
-
     }
 
     private void displayOrderDetails() {
@@ -96,7 +101,7 @@ public class MyStoreOrderSummary extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot2) {
 //                            Log.i("demo","my price is ");
-
+                                if(snapshot2 == null) return;
                                 float price = Float.parseFloat(snapshot2.child("price").getValue().toString()) / 100;
 
                                 orderSummaryList.add(snapshot2.child("name").getValue().toString() + "    " + "$" + price + "    " + product_quantity);

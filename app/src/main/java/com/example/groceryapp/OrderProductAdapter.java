@@ -156,7 +156,6 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
                        // Log.i("demo", "my holder position is: " + holder.getAdapterPosition());
                         if (entry.getKey().equals(each_pro.getId())) {
                             position_to_product_id.put(holder.getAdapterPosition(), each_pro.getId());
-                            Log.i("demo" ,"how many times did I ran");
                             holder.product_name.setText(each_pro.getName());
                             holder.product_brand.setText(each_pro.getBrand());
                             holder.product_price.setText(each_pro.getPriceAsString(true));

@@ -129,7 +129,8 @@ public class MyStoreOrdersFragment extends Fragment  {
 
                                     HashMap<String, String> user_order_ids = new HashMap<String,String>();
                                     user_order_ids.put(order_id, user_id);
-                                    order_to_user.add(user_order_ids);
+
+
 
 
                                     DatabaseReference reference_2 = FirebaseDatabase.getInstance().getReference(DBConstants.USERS_PATH).child(user_id);
@@ -137,11 +138,15 @@ public class MyStoreOrdersFragment extends Fragment  {
                                     reference_2.addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            String state = snapshot.child(DBConstants.STORE_ORDERS).child(order_id).child(DBConstants.ORDER_COMPLETE).getValue().toString();
+                                            String state2 = snapshot.child(DBConstants.STORE_ORDERS).child(order_id).child(DBConstants.ORDER_COMPLETE).getValue().toString();
 
-                                            if(state.equals("false")){
-                                            ordersTitleList.add(snapshot.child("name").getValue().toString() + "  " + order_id);
-                                            listViewAdapter.notifyDataSetChanged();}
+                                            if(state2.equals("false")){
+
+                                                order_to_user.add(user_order_ids);
+
+                                                ordersTitleList.add(snapshot.child("name").getValue().toString() + "  " + order_id);
+
+                                                listViewAdapter.notifyDataSetChanged();}
 
                                         }
 
